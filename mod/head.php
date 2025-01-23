@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Gestor Padel - <?= $_GET['head'] ?></title>
+  <title>Gestor Padel</title>
   <meta content="Gestor Pádel es un software intuitivo y eficiente diseñado para la reservación y gestión de alquiler de canchas de pádel. Con herramientas avanzadas para la administración de horarios, pagos en línea y comunicación con los jugadores, este sistema facilita la organización y mejora la experiencia de los usuarios y administradores. Perfecto para clubes deportivos y centros de pádel que buscan optimizar su operación diaria." name="description">
   <meta content="Gestor Pádel, software de pádel, reservación de canchas, alquiler de canchas de pádel, gestión deportiva, administración de clubes de pádel, sistema de reservas, gestión de horarios de pádel, herramienta para pádel, software deportivo." name="keywords">
 
@@ -31,5 +31,4 @@
   <link href="/css/style.css" rel="stylesheet">
 
 </head>
-
 <body>

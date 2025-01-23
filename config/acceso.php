@@ -23,6 +23,7 @@ if ( $_SESSION['acceso'] >= '5'){
   $stmt->bind_param("ssss", $fecha, $hora, $correo, $ip);
 
   if ($stmt->execute()) {
+    $_SESSION['acceso'] = 0; 
     echo 'Acceso Denegado';
   }
 
@@ -37,7 +38,7 @@ if(!empty($_POST['correo']) & !empty($_POST['pass']) ){
     $correo = $_POST['correo'];
     $pass = $_POST['pass'];
 
-    $sql = "SELECT id, correo, pass, propietario, priv FROM usuarios WHERE correo='$correo'";
+    $sql = "SELECT id, correo, pass, propietario, priv FROM usuario WHERE correo='$correo'";
     $resultado = $conex->query($sql);
     $num = $resultado->num_rows;
     if ($num > 0) {

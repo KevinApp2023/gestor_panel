@@ -1,7 +1,23 @@
 <?php 
-require('../../config/config.php');
-require('../../config/priv.php');
-require('../../mod/head.php');
+require('../config/config.php');
+require('../mod/head.php');
+
+if (isset($_SESSION['priv'])){
+
+  if ($_SESSION['priv'] == 1) {
+     header('Location: admin/panel');
+  }
+  
+  if ($_SESSION['priv'] == 2) {
+   header('Location: panel/panel');
+  }
+
+  if ($_SESSION['priv'] == 3) {
+      header('Location: clientes/panel');
+  }
+
+  }
+
 ?>
 
 
@@ -19,11 +35,12 @@ require('../../mod/head.php');
                   <span class="d-none d-lg-block">Gestor Padel</span>
                 </a>
               </div>
-              <div class="card mb-3">
+              <div class="card mb-3 pt-4">
 
                 <div class="card-body" id="container_acceso">
 
-                  <div class="pt-4 pb-2">
+                <div id="liveAlertPlaceholder"></div>
+                  <div class=" pb-2">
                     <h5 class="card-title text-center pb-0 fs-4">Inicie sesión</h5>
                     <p class="text-center small">Introduzca su correo y contraseña para iniciar sesión</p>
                   </div>
