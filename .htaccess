@@ -1,8 +1,11 @@
 
 RewriteEngine On
-RewriteRule ^$ /container/acceso/acceso.php [L,QSA]
-RewriteRule ^registrar$ /container/registrar/registrar.php [L,QSA]
+#Configuracion
+RewriteRule ^$ /container/acceso/acceso.php?head=Acceso [L,QSA]
+RewriteRule ^registrar$ /container/registrar/registrar.php?head=Registrar [L,QSA]
 RewriteRule ^([^/]+)$ /config/priv.php [L,QSA]
 RewriteRule ^([^/]+)/$ /config/priv.php [L,QSA]
 
 
+#Acceso
+RewriteRule ^mi/acceso$ /config/acceso [L,QSA]
