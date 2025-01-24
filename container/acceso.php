@@ -62,15 +62,25 @@ if (isset($_SESSION['priv'])){
                       <div class="invalid-feedback">Por favor, introduzca su contraseña!</div>
                     </div>
 
-                    <div class="col-12">
+                    <div class="col-6">
                       <div class="form-check">
                         <input class="form-check-input" type="checkbox" value="true" id="ver_pass">
-                        <label class="form-check-label" for="rememberMe">Echar un vistazo</label>
+                        <label class="form-check-label" for="rememberMe">Un vistazo</label>
                       </div>
                     </div>
+
+                    <div class="col-6">
+                      <p class="small mb-0 text-primary"><a id="res_pass">Has olvidado tu contraseña</a></p>
+                    </div>
+
                     <div class="col-12">
                       <a class="btn btn-primary w-100" id="acceso">Acceso</a>
                     </div>
+
+                   
+                    
+                  
+
                     <div class="col-12">
                       <p class="small mb-0">¿No tienes una cuenta? <a href="/registrar">Crea una cuenta</a></p>
                     </div>
@@ -89,5 +99,5 @@ if (isset($_SESSION['priv'])){
   </main>
   <script src="/js/acceso.js"></script>
   <?php 
-require('../../mod/footer_js.php');
+require('../mod/footer_js.php');
 ?>

@@ -8,16 +8,13 @@ RewriteRule ^container/([^/]+)/$ /config/priv.php [L,QSA]
 
 #dash_admin
 RewriteRule ^admin/panel$ /container/dash_admin/panel.php [L,QSA]
+RewriteRule ^admin/clientes$ /container/dash_admin/clientes.php [L,QSA]
 
-
-#dash_panel
-RewriteRule ^panel/panel$ /container/dash_panel/panel.php [L,QSA]
-
-#dash_clientes
-RewriteRule ^clientes/panel$ /container/dash_clientes/panel.php [L,QSA]
 
 #mi
 RewriteRule ^mi/acceso$ /config/acceso.php [L,QSA]
 RewriteRule ^mi/cerrar_session$ /config/cerrar_session.php [L,QSA]
+RewriteRule ^mi/res_pass$ /src/res_pass.php [L,QSA]
+RewriteRule ^mi/phpmailer_ress$ /src/phpmailer_ress.php [L,QSA]
 
 
