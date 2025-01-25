@@ -17,4 +17,6 @@ RewriteRule ^mi/cerrar_session$ /config/cerrar_session.php [L,QSA]
 RewriteRule ^mi/res_pass$ /src/res_pass.php [L,QSA]
 RewriteRule ^mi/phpmailer_ress$ /src/phpmailer_ress.php [L,QSA]
 
+RewriteRule ^mi/src/clientes$ /src/clientes.php [L,QSA]
+RewriteRule ^mi/src/consultar_cliente$ /src/consultar_cliente.php [L,QSA]
 
