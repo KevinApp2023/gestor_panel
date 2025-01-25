@@ -5,15 +5,16 @@ document.addEventListener("DOMContentLoaded", function () {
 
 function filtrar() {
 $.ajax({
-    url: '/mi/src/clientes',
+    url: '/mi/src/recargos',
     method: 'POST',
     data: { 
+        referencia: document.getElementById('referencia').value,
+        fecha_inicio: document.getElementById('fecha_inicio').value,
+        fecha_final: document.getElementById('fecha_final').value,
         identificacion: document.getElementById('identificacion').value,
         nombres: document.getElementById('nombres').value,
-        apellidos: document.getElementById('apellidos').value,
-        correo_electronico: document.getElementById('correo_electronico').value,
-        telefono: document.getElementById('telefono').value,
-        estado: document.getElementById('estado').value
+        apellidos: document.getElementById('apellidos').value
+
     },
     success: function(response) {
         $('#resultadoBusqueda').html(response);
@@ -341,27 +342,27 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-    $(document).on('click', '#b_fecha_registro', async function() {
+    $(document).on('click', '#fecha_inicio', async function() {
         const { value: selectedDate } = await Swal.fire({
-            title: 'Seleccione la fecha de registro',
+            title: 'Seleccione la fecha del inicio',
             input: 'date'
         });
 
         if (selectedDate) {
             const formattedDate = formatDate(selectedDate);
-            $('#b_fecha_registro').val(formattedDate);
+            $('#fecha_inicio').val(formattedDate);
         }
     });
 
-    $(document).on('click', '#n_fecha_registro', async function() {
+    $(document).on('click', '#fecha_final', async function() {
         const { value: selectedDate } = await Swal.fire({
-            title: 'Seleccione la fecha de registro',
+            title: 'Seleccione la fecha del final',
             input: 'date'
         });
 
         if (selectedDate) {
             const formattedDate = formatDate(selectedDate);
-            $('#n_fecha_registro').val(formattedDate);
+            $('#fecha_final').val(formattedDate);
         }
     });
 });

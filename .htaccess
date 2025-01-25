@@ -8,8 +8,12 @@ RewriteRule ^container/([^/]+)/$ /config/priv.php [L,QSA]
 
 #dash_admin
 RewriteRule ^admin/panel$ /container/dash_admin/panel.php [L,QSA]
+RewriteRule ^admin/recargos$ /container/dash_admin/recargos.php [L,QSA]
 RewriteRule ^admin/clientes$ /container/dash_admin/clientes.php [L,QSA]
 
+
+#dash_facturas
+RewriteRule ^admin/recargos/([^/]+)$ /container/dash_facturas/factura_recargo.php?referencia=$1 [L,QSA]
 
 #mi
 RewriteRule ^mi/acceso$ /config/acceso.php [L,QSA]
@@ -22,4 +26,5 @@ RewriteRule ^mi/src/consultar_cliente$ /src/consultar_cliente.php [L,QSA]
 RewriteRule ^mi/src/editar_cliente$ /src/editar_cliente.php [L,QSA]
 RewriteRule ^mi/src/guardar_cliente$ /src/guardar_cliente.php [L,QSA]
 RewriteRule ^mi/src/eliminar_cliente$ /src/eliminar_cliente.php [L,QSA]
+RewriteRule ^mi/src/recargos$ /src/recargos.php [L,QSA]
 

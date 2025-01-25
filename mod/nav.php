@@ -229,18 +229,28 @@
       if ($_SESSION['priv'] == 1) { ?>
 
   <li class="nav-item ">
-    <a class="nav-link active" href="panel">
+    <a class="nav-link active" href="/admin/panel">
       <i class="bi bi-grid"></i>
       <span>Panel</span>
     </a>
   </li>
 
   <li class="nav-item">
-    <a class="nav-link " href="clientes">
+    <a class="nav-link " href="/admin/recargos">
+      <i class="bi bi-bank"></i>
+      <span>Recargos</span>
+    </a>
+  </li>
+
+
+  <li class="nav-item">
+    <a class="nav-link " href="/admin/clientes">
       <i class="bi bi-people"></i>
       <span>Clientes</span>
     </a>
   </li>
+
+
 
   <?php 
 

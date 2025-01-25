@@ -10,6 +10,8 @@ if (!isset($_SESSION['acceso'])) {
     $_SESSION['acceso'] = 0; 
 }
 
+$fecha = date('Y-m-d');
+$hora = date('H:i:s');
 
 $requestUri = $_SERVER['REQUEST_URI'];
 
@@ -38,7 +40,7 @@ if (preg_match('#^/admin/#', $requestUri)) {
 
 
 
-$consult = "SELECT * FROM config WHERE name IN ('title', 'keywords', 'description', 'icon', 'lang', 'NIT', 'mail_Host', 'mail_Username', 'mail_Password', 'mail_Port', 'mail_setFrom')";
+$consult = "SELECT * FROM config WHERE name IN ('title', 'keywords', 'description', 'icon', 'lang', 'NIT', 'direccion', 'telefono', 'mail_Host', 'mail_Username', 'mail_Password', 'mail_Port', 'mail_setFrom')";
 $resultado = $conex->query($consult);
 
 if ($resultado->num_rows > 0) {
@@ -63,6 +65,15 @@ if ($resultado->num_rows > 0) {
             case 'NIT':
                 $NIT = $data['data'];
                 break;
+
+            case 'direccion':
+                $direccion = $data['data'];
+                break;
+
+            case 'telefono':
+                $telefono = $data['data'];
+                break;
+            
   
             case 'mail_Host':
                 $mail_Host = $data['data'];

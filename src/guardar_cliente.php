@@ -7,8 +7,7 @@ $apellidos = $_POST['apellidos'];
 $correo_electronico = $_POST['correo_electronico'];
 $telefono = $_POST['telefono'];
 $direccion = $_POST['direccion'];
-$fecha_registro = new DateTime($_POST['fecha_registro']);
-$fecha_registro = $fecha_registro->format('Y-m-d');
+$fecha_registro = $_POST['fecha_registro'];
 $saldo = $_POST['saldo'];
 $estado = $_POST['estado'];
 
