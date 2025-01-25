@@ -133,7 +133,7 @@ include("../../mod/nav.php");?>
                 <div class="col-sm-12 col-md-4">
                     <div class="p-3">
                         <label >Correo</label>
-                        <input  type="text" id="b_correo_electronico" class="border-primary form-control custom-input" Placeholder="Correo">
+                        <input  type="mail" id="b_correo_electronico" class="border-primary form-control custom-input" Placeholder="Correo">
                     </div>
                     <div class="p-3">
                         <label >Telefono</label>
@@ -206,7 +206,7 @@ include("../../mod/nav.php");?>
                 <div class="col-sm-12 col-md-4">
                     <div class="p-3">
                         <label >Correo</label>
-                        <input  type="text" id="n_correo_electronico" class="border-primary form-control custom-input" Placeholder="Correo">
+                        <input  type="mail" id="n_correo_electronico" class="border-primary form-control custom-input" Placeholder="Correo">
                     </div>
                     <div class="p-3">
                         <label >Telefono</label>
