@@ -13,7 +13,7 @@ RewriteRule ^admin/clientes$ /container/dash_admin/clientes.php [L,QSA]
 
 
 #dash_facturas
-RewriteRule ^admin/recargos/([^/]+)$ /container/dash_facturas/factura_recargo.php?referencia=$1 [L,QSA]
+RewriteRule ^facturas/recargos/([^/]+)$ /container/dash_facturas/factura_recargo.php?referencia=$1 [L,QSA]
 
 #mi
 RewriteRule ^mi/acceso$ /config/acceso.php [L,QSA]

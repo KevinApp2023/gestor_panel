@@ -28,6 +28,26 @@ $(document).ready(function() {
     });
 });
 
+$(document).ready(function () {
+    $(document).on('click', '#factura', function (event) {
+        var factura = event.target.getAttribute("data-ref");
+        var url = "/facturas/recargos/" + factura;
+
+        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+        if (isMobile) {
+            var link = document.createElement('a');
+            link.href = url;
+            link.download = 'Factura_Ticket.pdf';
+            link.click();
+        } else {
+            // En PC, abrir en otra pestaña
+            window.open(url, '_blank');
+        }
+    });
+});
+
+
 
 $(document).ready(function() {
     $(document).on('click', '#editar', function(event) {

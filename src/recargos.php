@@ -37,7 +37,7 @@ if ($resultado->num_rows > 0) {
 
     ?>
     <tr>
-    <td><a class="btn btn-primary p-2" href="/admin/recargos/<?= $fila['referencia'] ?>" ><i class="ri ri-arrow-right-circle-line"></i></a></td>
+    <td><a class="btn btn-primary p-2" id="factura" data-ref="<?= $fila['referencia'] ?>" ><i  data-ref="<?= $fila['referencia'] ?>" class="ri ri-arrow-right-circle-line"></i></a></td>
     <td><?= $fila['referencia'] ?></td>
     <td><?= $fila['fecha'] ?></td>
     <td><?= $fila['hora'] ?></td>

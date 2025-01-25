@@ -100,4 +100,4 @@ $pdf->MultiCell(0, 5, iconv("UTF-8", "ISO-8859-1", "*** Gracias por su preferenc
 $pdf->MultiCell(0, 5, iconv("UTF-8", "ISO-8859-1", "Recuerde consultar en su cuenta si el pago fue realizado."), 0, 'C');
 
 // Generar el PDF
-$pdf->Output("I", "$fecha _$hora _REF_$data_referencia.pdf", true);
+$pdf->Output("I", "$data_fecha _$data_hora _REF_$data_referencia.pdf", true);
