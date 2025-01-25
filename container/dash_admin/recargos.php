@@ -5,6 +5,123 @@ if (!isset($_SESSION['priv'])){
    header('Location: /');
  } 
 include("../../mod/nav.php");
+if (isset($_GET['referencia']) && !empty($_GET['referencia'])){?>
+<main id="main" class="main">
+
+<div class="pagetitle">
+  <h1>Recargos</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Admin</a></li>
+      <li class="breadcrumb-item"><a href="/admin/recargos">Recargos</a></li>
+      <li class="breadcrumb-item active"><?= $_GET['referencia'] ?></li>
+    </ol>
+  </nav>
+</div>
+
+<section class="section dashboard">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h6 class="fw-bold border-bottom pb-2">Cliente</h6>
+                <div class="mb-2">
+                    <label class="fw-bold">Identificación:</label>
+                    <input readonly type="text" id="n_identificacion" class="form-control" placeholder="Identificación">
+                </div>
+                <div class="mb-2">
+                    <label class="fw-bold">Nombres:</label>
+                    <input readonly type="text" id="n_nombres" class="form-control" placeholder="Nombres">
+                </div>
+                <div class="mb-2">
+                    <label class="fw-bold">Apellidos:</label>
+                    <input readonly type="text" id="n_apellidos" class="form-control" placeholder="Apellidos">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <h6 class="fw-bold border-bottom pb-2">Factura de Venta</h6>
+                <div class="mb-2">
+                    <label class="fw-bold">Referencia:</label>
+                    <input readonly type="text" id="referencia" class="form-control" placeholder="Referencia">
+                </div>
+                <div class="mb-2">
+                    <label class="fw-bold">Fecha:</label>
+                    <input readonly type="text" id="n_fecha" class="form-control" placeholder="Fecha">
+                </div>
+                <div class="mb-2">
+                    <label class="fw-bold">Hora:</label>
+                    <input readonly type="text" id="n_hora" class="form-control" placeholder="Hora">
+                </div>
+                <div class="mb-2">
+                    <label class="fw-bold">Total:</label>
+                    <input readonly type="text" id="n_saldo" class="form-control" placeholder="Saldo">
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabla de Detalles -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <h6 class="fw-bold border-bottom pb-2">Detalles</h6>
+                <table class="table table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Código</th>
+                            <th>Descripción</th>
+                            <th>Cant</th>
+                            <th>Valor Unitario</th>
+                            <th>Valor Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>02000100001</td>
+                            <td>Servicios a terceros</td>
+                            <td>1</td>
+                            <td>$1,500,000.00</td>
+                            <td>$1,500,000.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Totales -->
+        <div class="row">
+            <div class="col-md-6 offset-md-6">
+                <table class="table table-borderless">
+                    <tbody>
+                        <tr>
+                            <th>Total Bruto:</th>
+                            <td class="text-end">$1,500,000.00</td>
+                        </tr>
+                        <tr>
+                            <th>IVA (13%):</th>
+                            <td class="text-end">$286,000.00</td>
+                        </tr>
+                        <tr class="fw-bold">
+                            <th>Total a Pagar:</th>
+                            <td class="text-end">$1,747,500.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Notas -->
+        <div class="row">
+            <div class="col-12">
+                <p class="border-top pt-3">
+                    <strong>Condiciones de Pago:</strong> Crédito o efectivo según negociado. 
+                    <br>
+                    Recuerde consultar su cuenta para verificar si el pago fue realizado.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<?php 
+}else{
 ?>
 
 <main id="main" class="main">
@@ -165,7 +282,10 @@ include("../../mod/nav.php");
 
 </section>
 </main>
-
+<?php 
+}
+?>
+ 
 <script src="/js/recargos.js"></script>
 <?php 
 include('../../mod/footer.php');

@@ -12,7 +12,9 @@ if ($resultado->num_rows > 0) {
         $data_identificacion = $fila['identificacion'];
         $data_nombres = $fila['nombres'];
         $data_apellidos = $fila['apellidos'];
-        $data_saldo = $fila['saldo'];
+        $data_sub_total = $fila['sub_total'];
+        $data_iva = $fila['iva'];
+        $data_total = $fila['total'];
     }
 }
 
@@ -58,6 +60,7 @@ $pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Nombres: $data_nombres"), 0, 1);
 $pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Apellidos: $data_apellidos"), 0, 1);
 $pdf->Ln(2);
 
+
 // Detalle de la transacción
 $pdf->SetDrawColor(200, 200, 200);
 $pdf->Line(5, $pdf->GetY(), 75, $pdf->GetY());
@@ -68,18 +71,18 @@ $pdf->Cell(0, 5, strtoupper("Detalle de la transaccion"), 0, 1);
 $pdf->Ln(2);
 
 $pdf->SetFont('Arial', '', 10);
-$pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Monto abonado: $$data_saldo"), 0, 1);
+$pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Monto abonado: $$data_sub_total"), 0, 1);
 $pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Saldo pendiente: $0.00"), 0, 1);
 $pdf->Ln(2);
 
 // Totales
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(40, 6, "Subtotal:", 0, 0);
-$pdf->Cell(30, 6, "$$data_saldo", 0, 1, 'R');
+$pdf->Cell(30, 6, "$$data_sub_total", 0, 1, 'R');
 $pdf->Cell(40, 6, "IVA (13%):", 0, 0);
-$pdf->Cell(30, 6, "$0.00", 0, 1, 'R');
+$pdf->Cell(30, 6, "$$data_iva", 0, 1, 'R');
 $pdf->Cell(40, 6, "Total a pagar:", 0, 0);
-$pdf->Cell(30, 6, "$$data_saldo", 0, 1, 'R');
+$pdf->Cell(30, 6, "$$data_total", 0, 1, 'R');
 
 // Línea divisoria
 $pdf->Ln(2);

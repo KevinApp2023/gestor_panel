@@ -9,7 +9,9 @@ RewriteRule ^container/([^/]+)/$ /config/priv.php [L,QSA]
 #dash_admin
 RewriteRule ^admin/panel$ /container/dash_admin/panel.php [L,QSA]
 RewriteRule ^admin/recargos$ /container/dash_admin/recargos.php [L,QSA]
+RewriteRule ^admin/recargos/([^/]+)$ /container/dash_admin/recargos.php?referencia=$1 [L,QSA]
 RewriteRule ^admin/clientes$ /container/dash_admin/clientes.php [L,QSA]
+RewriteRule ^admin/qr_cliente$ /container/dash_admin/qr_cliente.php [L,QSA]
 
 
 #dash_facturas
