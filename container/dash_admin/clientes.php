@@ -59,8 +59,7 @@ include("../../mod/nav.php");?>
     </select>
   </div>
 
-  <div class="col-12 p-2">
-    <div class="container">
+  <div class="col-md-12 mt-2">
         <div class="hscroll">
             <table class="table table-striped " id="tabla_datos">
                 <thead>
@@ -81,8 +80,6 @@ include("../../mod/nav.php");?>
             </table>
         </div>
     </div>
-  </div>
-
 </div>
 
 

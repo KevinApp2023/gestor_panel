@@ -219,6 +219,63 @@ $(document).ready(function() {
     });
 });
 
+
+
+
+$(document).ready(function() {
+    $(document).on('click', '#eliminar', function(event) {
+        var id = event.target.getAttribute("value");
+        Swal.fire({
+            title: "¿Estás seguro de que deseas eliminar este registro?",
+            text: "Esta acción no se puede deshacer.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí, eliminar",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var form_data = new FormData();
+                form_data.append('id', id);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/mi/src/eliminar_cliente",
+                    data: form_data,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        if (response == '1') {
+                            Toast.fire({
+                                icon: "success",
+                                title: "Registro eliminado con éxito"
+                            });
+                        } else if (response == '2') {
+                            Toast.fire({
+                                icon: "error",
+                                title: "Error al eliminar el registro"
+                            });
+                        }
+                    }
+                }).then(() => {
+                    filtrar();
+                });
+            }
+        });
+    });
+});
+
+
     
 
 $(document).ready(function() {
