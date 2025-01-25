@@ -82,7 +82,7 @@ $(document).ready(function() {
 $(document).ready(function() {
     $(document).on('click', '#guardar', function(event) {
         var id = event.target.getAttribute("value");
-        var estado = $('#estado_data').attr('value');
+        var estado = $('#estado_data').attr('value')
         Swal.fire({
             title: "¿Quieres guardar los cambios?",
             showDenyButton: true,
@@ -95,26 +95,46 @@ $(document).ready(function() {
               
                     var form_data = new FormData();
                     form_data.append('id', id);
-                    form_data.append('codigo', $('#b_codigo').val());
                     form_data.append('identificacion', $('#b_identificacion').val());
                     form_data.append('nombres', $('#b_nombres').val());
                     form_data.append('apellidos', $('#b_apellidos').val());
-                    form_data.append('entidad', $('#b_entidad').val());
-                    form_data.append('sede', $('#b_sede').val());
-                    form_data.append('jornada', $('#b_jornada').val());
-                    form_data.append('grupo', $('#b_grupo').val());
+                    form_data.append('direccion', $('#b_direccion').val());
+                    form_data.append('fecha_registro', $('#b_fecha_registro').val());
+                    form_data.append('saldo', $('#b_saldo').val());
+                    form_data.append('correo_electronico', $('#b_correo_electronico').val());
                     form_data.append('telefono', $('#b_telefono').val());
-                    form_data.append('correo', $('#b_correo').val());
                     form_data.append('estado', estado);
                   
                 $.ajax({
                     type: "POST",
-                    url: "/mi/src/editar_datos",
+                    url: "/mi/src/editar_cliente",
                     data: form_data,
                     contentType: false,
                     processData: false,
                     success: function(response) {
                         $('body').append(response);
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        if (response == '1'){
+                            Toast.fire({
+                                icon: "success",
+                                title: "Datos guardados con exito"
+                            });
+                        }else  if (response == '2'){
+                            Toast.fire({
+                                icon: "error",
+                                title: "Error al guardados los datos"
+                            });
+                        }
                     }
                 }).then(() => {
                    filtrar();
@@ -129,6 +149,75 @@ $(document).ready(function() {
     });
 });
 
+
+
+$(document).ready(function() {
+    $(document).on('click', '#n_guardar', function(event) {
+        var estado = $('#n_estado_data').attr('value')
+        Swal.fire({
+            title: "¿Quieres guardar los cambios?",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Guardar",
+            denyButtonText: `No guardar`,
+            icon: "question",
+        }).then((result) => {
+            if (result.isConfirmed) {
+              
+                    var form_data = new FormData();
+                    form_data.append('identificacion', $('#n_identificacion').val());
+                    form_data.append('nombres', $('#n_nombres').val());
+                    form_data.append('apellidos', $('#n_apellidos').val());
+                    form_data.append('direccion', $('#n_direccion').val());
+                    form_data.append('fecha_registro', $('#n_fecha_registro').val());
+                    form_data.append('saldo', $('#n_saldo').val());
+                    form_data.append('correo_electronico', $('#n_correo_electronico').val());
+                    form_data.append('telefono', $('#n_telefono').val());
+                    form_data.append('estado', estado);
+                  
+                $.ajax({
+                    type: "POST",
+                    url: "/mi/src/guardar_cliente",
+                    data: form_data,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        $('body').append(response);
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        if (response == '1'){
+                            Toast.fire({
+                                icon: "success",
+                                title: "Datos guardados con exito"
+                            });
+                        }else  if (response == '2'){
+                            Toast.fire({
+                                icon: "error",
+                                title: "Error al guardados los datos"
+                            });
+                        }
+                    }
+                }).then(() => {
+                   filtrar();
+                });
+            
+
+            } else if (result.isDenied) {
+                Swal.fire("Los cambios no se guardan", "", "info");
+            }
+        });
+
+    });
+});
 
     
 
@@ -160,12 +249,31 @@ $(document).ready(function() {
             if (estado_data.classList.contains("btn-danger")) {
                 estado_data.classList.remove("btn-danger");
                 estado_data.classList.add("btn-success");
-                estado_data.setAttribute("value", "Activo");
+                estado_data.setAttribute("value", "1");
                 estado_data.innerHTML = '<i class="bi bi-check-circle me-2"></i>Activo';
             } else {
                 estado_data.classList.add("btn-danger");
                 estado_data.classList.remove("btn-Success");
-                estado_data.setAttribute("value", "Suspendido");
+                estado_data.setAttribute("value", "2");
+                estado_data.innerHTML = '<i class="bi bi-x-circle me-2"></i>Suspendido';
+            }
+        }
+    });
+});
+
+$(document).ready(function() {
+    $(document).on('click', '#n_estado_data', function() {
+        const estado_data = document.getElementById("n_estado_data");
+        if (estado_data) {
+            if (estado_data.classList.contains("btn-danger")) {
+                estado_data.classList.remove("btn-danger");
+                estado_data.classList.add("btn-success");
+                estado_data.setAttribute("value", "1");
+                estado_data.innerHTML = '<i class="bi bi-check-circle me-2"></i>Activo';
+            } else {
+                estado_data.classList.add("btn-danger");
+                estado_data.classList.remove("btn-Success");
+                estado_data.setAttribute("value", "2");
                 estado_data.innerHTML = '<i class="bi bi-x-circle me-2"></i>Suspendido';
             }
         }
