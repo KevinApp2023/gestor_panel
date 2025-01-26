@@ -38,4 +38,8 @@ RewriteRule ^mi/src/guardar_bono$ /src/guardar_bono.php [L,QSA]
 RewriteRule ^mi/src/eliminar_bono$ /src/eliminar_bono.php [L,QSA]
 RewriteRule ^mi/src/usuarios$ /src/usuarios.php [L,QSA]
 RewriteRule ^mi/src/consultar_usuario$ /src/consultar_usuario.php [L,QSA]
+RewriteRule ^mi/src/editar_usuario$ /src/editar_usuario.php [L,QSA]
+RewriteRule ^mi/src/eliminar_usuario$ /src/eliminar_usuario.php [L,QSA]
+
+
 

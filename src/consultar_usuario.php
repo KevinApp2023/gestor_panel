@@ -30,7 +30,7 @@ if (isset($_POST['id'])) {
 } else {
    
     $id = $_SESSION['id'];
-    $sql = "SELECT * FROM usuarios WHERE id = '$id'";
+    $sql = "SELECT * FROM usuario WHERE id = '$id'";
     $resultado = $conex->query($sql);
     if ($resultado->num_rows > 0) {
         $fila = $resultado->fetch_assoc();

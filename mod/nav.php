@@ -163,12 +163,12 @@
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="/img/profile-img.jpg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
+            <span class="d-none d-md-block dropdown-toggle ps-2"><?= $_SESSION['nombres'] ?></span>
           </a>
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
             <li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
+              <h6><?= $_SESSION['nombres'] ?></h6>
               <span><?php if (isset($_SESSION['priv'])){ if ($_SESSION['priv'] == 1) { echo "Administrador"; }else if ($_SESSION['priv'] == 2) { echo "Panel"; }else if ($_SESSION['priv'] == 3) { echo "Clientes"; } } ?></span> 
               </li>
             <li>
@@ -176,21 +176,15 @@
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
+              <a class="dropdown-item d-flex align-items-center" id="data_perfil" data-bs-toggle="modal" data-bs-target="#editar_perfil">
                 <i class="bi bi-person"></i>
-                <span>My Profile</span>
+                <span>Mi Perfil</span>
               </a>
             </li>
             <li>
               <hr class="dropdown-divider">
             </li>
 
-            <li>
-              <a class="dropdown-item d-flex align-items-center" href="users-profile.html">
-                <i class="bi bi-gear"></i>
-                <span>Account Settings</span>
-              </a>
-            </li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -198,7 +192,7 @@
             <li>
               <a class="dropdown-item d-flex align-items-center" href="pages-faq.html">
                 <i class="bi bi-question-circle"></i>
-                <span>Need Help?</span>
+                <span>¿Necesitas ayuda?</span>
               </a>
             </li>
             <li>
@@ -280,3 +274,59 @@
 </ul>
 
 </aside>
+
+
+
+<div class="modal fade" id="editar_perfil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog  p-3">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-4" id="perfil_exampleModalFullscreenLabel"></h1>
+      </div>
+      <div class="modal-body" id="container_data">
+
+      <div class="row">
+         
+                <div class="col-md-12">
+                    <div class="p-3">
+                        <label >Correo Electronico</label>
+                        <input  type="mail" id="perfil_correo"  class="border-primary form-control custom-input" Placeholder="Correo electronico">
+                    </div>
+
+                    <div class="p-3">
+                        <label >Nombres</label>
+                        <input  type="text" id="perfil_nombres" class="border-primary form-control custom-input" Placeholder="Nombres">
+                    </div>
+
+                    
+
+                    <div class="p-3">
+                        <label >Privilegios</label>
+                        <select class="border-primary form-control custom-input" id="perfil_priv" >
+                            <option selected class="text-danger" value="" id="sperfil_priv"></option><hr>
+                        </select>
+                    </div>
+
+
+
+                    <div class="p-3">
+                        <label >Nueva contraseña</label>
+                        <input  type="password" id="perfil_pass" class="border-primary form-control custom-input" Placeholder="* * *">
+                    </div>
+                    
+                  
+                </div>
+
+               
+
+ 
+
+            </div>
+      </div>
+      <div class="modal-footer">
+        <a type="button" id="perfil_cancelar" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-square me-2"></i>Cancelar</a>
+        <a type="button" id="perfil_guardar" class="btn btn-primary" data-bs-dismiss="modal"><i class="bi bi-floppy me-2"></i>Guardar</a>
+      </div>
+    </div>
+  </div>
+</div>
