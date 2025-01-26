@@ -23,7 +23,7 @@ include("../../mod/nav.php");?>
 <div class="row">
 
   <div class="col-md-6 mb-2">
-    <a id="n_nuevo_cliente" data-bs-toggle="modal" data-bs-target="#nuevo_cliente" class="btn btn-primary w-100"><i class=" bi bi-person-plus-fill me-2"></i>Nuevo Cliente</a>
+    <a id="n_nuevo_bono" data-bs-toggle="modal" data-bs-target="#nuevo_bono" class="btn btn-primary w-100"><i class=" bi bi-gift me-2"></i>Nuevo Bono</a>
   </div>
   
   <div class="col-md-6 mb-2">
@@ -73,71 +73,41 @@ include("../../mod/nav.php");?>
 
 
 
-<div class="modal fade" id="editar_cliente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen p-3">
+<div class="modal fade" id="nuevo_bono" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog  p-3">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-4" id="exampleModalFullscreenLabel"></h1>
+        <h1 class="modal-title fs-4" id="exampleModalFullscreenLabel">Registrar nuevo bono</h1>
       </div>
       <div class="modal-body">
 
-      <div class="row">
+
+  <div class="mb-3">
+                    <label class="fw-bold">Desde</label>
                 
-                <div class="col-sm-12 col-md-4">
-
-                    <div class="p-3">
-                        <label >Identificacion</label>
-                        <input  type="text" id="b_identificacion"  class="border-primary form-control custom-input" Placeholder="Identificacion">
+                    <div class="input-group">
+                      <span class="border-primary input-group-text">$</span>
+                      <input type="number" id="n_desde" class=" border-end-0 border-start-0 border-primary form-control" aria-label="Amount (to the nearest dollar)">
+                      <span class="border-primary  input-group-text">.00</span>
                     </div>
-                    <div class="p-3">
-                        <label >Nombres</label>
-                        <input  type="text" id="b_nombres" class="border-primary form-control custom-input" Placeholder="Nombres">
-                    </div>
-                    <div class="p-3">
-                        <label >Apellidos</label>
-                        <input  type="text" id="b_apellidos" class="border-primary form-control custom-input" Placeholder="Apellidos">
-                    </div>
-                  
                 </div>
 
-                <div class="col-sm-12 col-md-4">
-                    <div class="p-3">
-                        <label >Direccion</label>
-                        <input  type="text" id="b_direccion" class="border-primary form-control custom-input" Placeholder="Direccion">
-                    </div>
-                    <div class="p-3">
-                        <label >Fecha de registro</label>
-                        <input readonly type="text" id="b_fecha_registro" class="border-primary form-control custom-input" Placeholder="Fecha de registro">
-                    </div>
-                    <div class="p-3">
-                        <label >Saldo</label>
-                        <input  type="text" id="b_saldo" class="border-primary form-control custom-input" Placeholder="Saldo">
-                    </div>
-                   
-                </div>
 
-                <div class="col-sm-12 col-md-4">
-                    <div class="p-3">
-                        <label >Correo</label>
-                        <input  type="mail" id="b_correo_electronico" class="border-primary form-control custom-input" Placeholder="Correo">
-                    </div>
-                    <div class="p-3">
-                        <label >Telefono</label>
-                        <input  type="text" id="b_telefono" class="border-primary form-control custom-input" Placeholder="Telefono">
-                    </div>
+  <div class=" mb-3">
+    <select id="n_tipo" name="n_tipo" class="border-primary form-control custom-input ">
+    <option value="">Tipo</option>
+    <option value="1">Sumatoria</option>
+    <option value="2">Porcentaje</option>
+    </select>
+  </div>
 
-                    <div class="p-3">
-                        <label >Estado</label>
-                        <div id="b_estado"></div>
-                    </div>
-
-                </div>
-
-            </div>
+  <div class=" mb-3">
+    <input Placeholder="Cantidad" type="number" id="n_cantidad" class="border-primary form-control custom-input ">
+  </div>  
+      
       </div>
       <div class="modal-footer">
         <a type="button" id="cancelar" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-square me-2"></i>Cancelar</a>
-        <a type="button" id="eliminar" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-trash3 me-2"></i>Eliminar</a>
         <a type="button" id="guardar" class="btn btn-primary" data-bs-dismiss="modal"><i class="bi bi-floppy me-2"></i>Guardar</a>
       </div>
     </div>

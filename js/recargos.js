@@ -60,7 +60,12 @@ $(document).ready(function() {
                 <h6 class="fw-bold border-bottom pb-2">Factura de Venta</h6>
                 <div class="mb-2">
                     <label class="fw-bold">SubTotal</label>
-                    <input  type="number" id="sub_total" class="form-control" placeholder="0">
+                
+                    <div class="input-group">
+                      <span class="input-group-text">$</span>
+                      <input type="number" id="sub_total" class="form-control" aria-label="Amount (to the nearest dollar)">
+                      <span class="input-group-text">.00</span>
+                    </div>
                 </div>
             </div>`;
 
@@ -149,15 +154,17 @@ $(document).ready(function() {
                                 toast.onmouseleave = Swal.resumeTimer;
                             }
                         });
-                        if (response == '1'){
+                        if (response != '2'){
                             Toast.fire({
                                 icon: "success",
-                                title: "Datos guardados con exito"
-                            });
+                                title: "Recargo generado con exito"
+                            }).then(() => {
+                               window.location = 'recargos/' + response;
+                             });
                         }else  if (response == '2'){
                             Toast.fire({
                                 icon: "error",
-                                title: "Error al guardados los datos"
+                                title: "Error al generar el recargo"
                             });
                         }
                     }

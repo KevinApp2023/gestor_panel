@@ -33,4 +33,6 @@ RewriteRule ^mi/src/guardar_qr$ /src/guardar_qr.php [L,QSA]
 RewriteRule ^mi/src/guardar_recargo$ /src/guardar_recargo.php [L,QSA]
 RewriteRule ^mi/src/anular_recargo$ /src/anular_recargo.php [L,QSA]
 RewriteRule ^mi/src/bonos$ /src/bonos.php [L,QSA]
+RewriteRule ^mi/src/guardar_bono$ /src/guardar_bono.php [L,QSA]
+RewriteRule ^mi/src/eliminar_bono$ /src/eliminar_bono.php [L,QSA]
 

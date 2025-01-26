@@ -184,7 +184,7 @@ if ($resultado->num_rows > 0) {
   </div>
 
   <div class="col-md mb-2">
-    <input readonly Placeholder="Referencia" type="text" id="referencia" class="border-primary form-control custom-input ">
+    <input  Placeholder="Referencia" type="text" id="referencia" class="border-primary form-control custom-input ">
   </div>  
 
   <div class="col-md mb-2">

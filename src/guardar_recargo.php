@@ -31,7 +31,7 @@ if ($unique_resultado_insert) {
 
 
 
-            $unique_sql_bonos = "SELECT * FROM bonos WHERE base <= '$unique_sub_total' ORDER BY base ASC LIMIT 1";
+            $unique_sql_bonos = "SELECT * FROM bonos WHERE base <= '$unique_sub_total' ORDER BY base DESC LIMIT 1";
             $unique_resultado_bonos = $conex->query($unique_sql_bonos);
 
             if ($unique_resultado_bonos->num_rows >= 1) {
@@ -44,7 +44,7 @@ if ($unique_resultado_insert) {
 
                     $unique_total = $unique_sub_total;
 
-                    $unique_sql_insert_bono = "INSERT INTO recargos (referencia, fecha, hora, cliente, sub_total, iva, total) VALUES ('', '$fecha', '$hora', '$unique_cliente', '$unique_sub_total', '0', '$unique_total')";
+                    $unique_sql_insert_bono = "INSERT INTO recargos (referencia, fecha, hora, cliente, sub_total, iva, total, estado) VALUES ('', '$fecha', '$hora', '$unique_cliente', '$unique_sub_total', '0', '$unique_total', '1')";
                     $unique_resultado_insert_bono = $conex->query($unique_sql_insert_bono);
 
                     if ($unique_resultado_insert_bono) {
@@ -58,7 +58,7 @@ if ($unique_resultado_insert) {
                             $unique_resultado_update_saldo_bono = $conex->query($unique_sql_update_saldo_bono);
 
                             if ($unique_resultado_update_saldo_bono) {
-                                echo '1';
+                                echo "$unique_referencia";
                             } else {
                                 echo '2';
                             }
@@ -70,7 +70,7 @@ if ($unique_resultado_insert) {
                     }
                 }
             } else {
-                echo '1';
+                echo "$unique_referencia";
             }
         } else {
             echo '2';
