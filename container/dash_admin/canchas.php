@@ -8,7 +8,24 @@ include("../../mod/head.php");
  include("../../mod/nav.php");
  
  if (isset($_GET['id']) && !empty($_GET['id'])){ ?>
+<main id="main" class="main">
+<div class="pagetitle">
+  <h1>Canchas</h1>
+  <nav>
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="/">Admin</a></li>
+      <li class="breadcrumb-item active">Canchas</li>
+    </ol>
+  </nav>
+</div>
+<section class="section dashboard">
+<input id="cancha" value="<?= $_GET['id'] ?>" class="d-none">
+<div id='calendar'></div>
+<script src='/js/index.global.js'></script>
 
+
+</section>
+</main>
 
 
 
@@ -54,10 +71,19 @@ include("../../mod/head.php");
       <div class="modal-body" id="container_data">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="p-3">
+                    <div class="p-3 mb-2">
                         <label >Nombre de la cancha</label>
                         <input  type="text" id="nombre"  class="border-primary form-control custom-input" Placeholder="Cancha #01">
                     </div>
+                    <div class="p-3 mb-2">
+                    <label class="fw-bold">SubTotal</label>
+                
+                    <div class="input-group">
+                      <span class="input-group-text">$</span>
+                      <input type="number" id="valor_hora" class="form-control" aria-label="Amount (to the nearest dollar)">
+                      <span class="input-group-text">.00</span>
+                    </div>
+                </div>
                 </div>
             </div>
       </div>

@@ -30,6 +30,7 @@ $(document).ready(function() {
               
                     var form_data = new FormData();
                     form_data.append('nombre', $('#nombre').val());
+                    form_data.append('valor_hora', $('#valor_hora').val());
                   
                 $.ajax({
                     type: "POST",
@@ -74,3 +75,68 @@ $(document).ready(function() {
 
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    var cancha = $('#cancha').val()
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+      headerToolbar: {
+        left: 'prevYear,prev,next,nextYear',
+        center: 'title',
+        right: 'dayGridMonth,dayGridWeek,dayGridDay,listWeek',
+      },
+  
+      buttonText: {
+        today: 'Hoy',
+        month: 'Mes',
+        week: 'Semana',
+        day: 'Día',
+        list: 'Lista'
+      },
+  
+      eventClick: function(info) {
+        var eventObj = info.event;
+        Swal.fire({
+          title: eventObj.title,
+          html: `
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr>
+                <th style="text-align: left; border: 1px solid #ddd; padding: 8px;">Cancha</th>
+                <td style="border: 1px solid #ddd; padding: 8px;">${info.event.extendedProps.cancha || 'No disponible'}</td>
+              </tr>
+              <tr>
+                <th style="text-align: left; border: 1px solid #ddd; padding: 8px;">Fecha y hora de inicio</th>
+                <td style="border: 1px solid #ddd; padding: 8px;">${info.event.start ? info.event.start.toLocaleString() : 'No disponible'}</td>
+              </tr>
+              <tr>
+                <th style="text-align: left; border: 1px solid #ddd; padding: 8px;">Fecha y hora final</th>
+                <td style="border: 1px solid #ddd; padding: 8px;">${info.event.end ? info.event.end.toLocaleString() : 'No disponible'}</td>
+              </tr>
+            </table>
+          `,
+        });
+      },
+  
+      initialDate: new Date().toISOString().split('T')[0],
+      navLinks: true,
+      dayMaxEvents: true,
+      dayMaxEventRows: true,
+      locale: 'es',
+      eventDisplay: true,
+
+      events: {
+        url: '/mi/src/reservas?cancha=' + cancha,
+        method: 'GET',
+        failure: function() {
+          console.error('Error al cargar los eventos');
+        }
+      }
+    });
+  
+    calendar.render();
+  });
+  
+
+
+

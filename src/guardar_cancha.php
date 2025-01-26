@@ -2,8 +2,9 @@
 include("../config/config.php");
 
 $nombre = $_POST['nombre'];
+$valor_hora = $_POST['valor_hora'];
 
-$sql = "INSERT INTO canchas (nombre, estado) VALUES ('$nombre', '2')";
+$sql = "INSERT INTO canchas (nombre, valor_hora, estado) VALUES ('$nombre', '$valor_hora', '2')";
 $resultado = $conex->query($sql);
 if ($resultado) {
    echo '1';

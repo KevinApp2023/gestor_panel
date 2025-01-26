@@ -44,6 +44,7 @@ RewriteRule ^mi/src/editar_usuario$ /src/editar_usuario.php [L,QSA]
 RewriteRule ^mi/src/eliminar_usuario$ /src/eliminar_usuario.php [L,QSA]
 RewriteRule ^mi/src/guardar_cancha$ /src/guardar_cancha.php [L,QSA]
 RewriteRule ^mi/src/canchas$ /src/canchas.php [L,QSA]
+RewriteRule ^mi/src/reservas$ /src/reservas.php [L,QSA]
 
 
 
