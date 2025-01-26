@@ -242,6 +242,14 @@
     </a>
   </li>
 
+  <li class="nav-item">
+    <a class="nav-link " href="/admin/bonos">
+      <i class="bi bi-gift"></i>
+      <span>Bonos</span>
+    </a>
+  </li>
+
+
 
   <li class="nav-item">
     <a class="nav-link " href="/admin/clientes">

@@ -192,7 +192,7 @@ if ($resultado->num_rows > 0) {
   </div>
 
   <div class="col-md mb-2">
-    <input Placeholder="Fecha Final" type="text" id="fecha_final" class="border-primary form-control custom-input ">
+    <input readonly Placeholder="Fecha Final" type="text" id="fecha_final" class="border-primary form-control custom-input ">
   </div>
 
 
@@ -255,6 +255,37 @@ if ($resultado->num_rows > 0) {
         <h1 class="modal-title fs-4" id="exampleModalFullscreenLabel">Nuevo Recargo</h1>
       </div>
       <div class="modal-body">
+
+      
+<div class="d-none" id="qr_camara_movil" >
+<div id="scanner-container">
+<?php
+
+function obtenerArchivoQRSegunDispositivo() {
+    $userAgent = $_SERVER['HTTP_USER_AGENT'];
+    
+    if (strpos($userAgent, 'Android') !== false) {
+        return '../../mod/qr-android.php';
+    } else {
+        return '../../mod/qr-iso.php';
+    }
+}
+
+$archivoQR = obtenerArchivoQRSegunDispositivo();
+
+if (file_exists($archivoQR)) {
+    include $archivoQR;
+} else {
+    echo "No se encontró un archivo QR para este dispositivo.";
+}
+
+?>
+</div>
+ </div>
+
+        <div class="mb-2 mb-3 d-block d-block d-lg-none">
+            <button class="btn btn-primary w-100" id="qr_movil"><i class="fas fa-mobile-alt me-2"></i>Abrir Escáner QR Movil</button>
+        </div>
 
         <div class="mb-2 mb-3">
             <input type="password" id="r_cliente" class="form-control" placeholder="CODIGO CLIENTE">

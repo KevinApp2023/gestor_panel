@@ -296,3 +296,24 @@ function formatDate(date) {
     const [year, month, day] = date.split('-');
     return `${year}-${month}-${day}`;
 }
+
+
+
+$(document).ready(function() {
+    $(document).on('click', '#qr_movil', function(event) {
+          const qrCamaraMovil = document.getElementById("qr_camara_movil");
+    if (qrCamaraMovil) {
+        if (qrCamaraMovil.classList.contains("d-none")) {
+            qrCamaraMovil.classList.remove("d-none");
+            qrCamaraMovil.classList.add("d-block", "d-lg-none");
+            $('#qr_movil').html('Ocultar Escáner QR Movil');
+
+        } else {
+            qrCamaraMovil.classList.add("d-none");
+            qrCamaraMovil.classList.remove("d-block", "d-lg-none");
+            $('#qr_movil').html('Abrir Escáner QR Movil');
+
+        }
+    }
+});
+});
