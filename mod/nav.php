@@ -258,7 +258,12 @@
     </a>
   </li>
 
-
+  <li class="nav-item">
+    <a class="nav-link " href="/admin/usuarios">
+      <i class="ri ri-shield-user-line"></i>
+      <span>Usuarios</span>
+    </a>
+  </li>
 
   <?php 
 

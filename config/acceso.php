@@ -38,7 +38,7 @@ if(!empty($_POST['correo']) & !empty($_POST['pass']) ){
     $correo = $_POST['correo'];
     $pass = $_POST['pass'];
 
-    $sql = "SELECT id, correo, pass, propietario, priv FROM usuario WHERE correo='$correo'";
+    $sql = "SELECT id, correo, nombres, pass, propietario, priv FROM usuario WHERE correo='$correo'";
     $resultado = $conex->query($sql);
     $num = $resultado->num_rows;
     if ($num > 0) {
@@ -50,6 +50,7 @@ if(!empty($_POST['correo']) & !empty($_POST['pass']) ){
       if ($pass_bd == $pass_c) {
         $_SESSION['id'] = $row['id'];
         $_SESSION['correo'] = $row['correo'];
+        $_SESSION['nombres'] = $row['nombres'];
         $_SESSION['pass'] = $_POST['pass'];
         $_SESSION['propietario'] = $row['propietario'];
         $_SESSION['priv'] = $row['priv'];

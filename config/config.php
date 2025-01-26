@@ -22,7 +22,7 @@ if (preg_match('#^/admin/#', $requestUri)) {
         exit();
     }
 
-} else if (preg_match('#^/panel/#', $requestUri)) {
+} else if (preg_match('#^/cabina/#', $requestUri)) {
 
    if (!isset($_SESSION['priv']) || $_SESSION['priv'] != 2) {
     header("Location: /");

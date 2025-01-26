@@ -12,6 +12,7 @@ RewriteRule ^admin/recargos$ /container/dash_admin/recargos.php [L,QSA]
 RewriteRule ^admin/recargos/([^/]+)$ /container/dash_admin/recargos.php?referencia=$1 [L,QSA]
 RewriteRule ^admin/clientes$ /container/dash_admin/clientes.php [L,QSA]
 RewriteRule ^admin/bonos$ /container/dash_admin/bonos.php [L,QSA]
+RewriteRule ^admin/usuarios$ /container/dash_admin/usuarios.php [L,QSA]
 
 
 #dash_facturas
@@ -35,4 +36,6 @@ RewriteRule ^mi/src/anular_recargo$ /src/anular_recargo.php [L,QSA]
 RewriteRule ^mi/src/bonos$ /src/bonos.php [L,QSA]
 RewriteRule ^mi/src/guardar_bono$ /src/guardar_bono.php [L,QSA]
 RewriteRule ^mi/src/eliminar_bono$ /src/eliminar_bono.php [L,QSA]
+RewriteRule ^mi/src/usuarios$ /src/usuarios.php [L,QSA]
+RewriteRule ^mi/src/consultar_usuario$ /src/consultar_usuario.php [L,QSA]
 
