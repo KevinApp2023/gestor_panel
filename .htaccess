@@ -29,4 +29,7 @@ RewriteRule ^mi/src/editar_cliente$ /src/editar_cliente.php [L,QSA]
 RewriteRule ^mi/src/guardar_cliente$ /src/guardar_cliente.php [L,QSA]
 RewriteRule ^mi/src/eliminar_cliente$ /src/eliminar_cliente.php [L,QSA]
 RewriteRule ^mi/src/recargos$ /src/recargos.php [L,QSA]
+RewriteRule ^mi/src/guardar_qr$ /src/guardar_qr.php [L,QSA]
+RewriteRule ^mi/src/guardar_recargo$ /src/guardar_recargo.php [L,QSA]
+RewriteRule ^mi/src/anular_recargo$ /src/anular_recargo.php [L,QSA]
 

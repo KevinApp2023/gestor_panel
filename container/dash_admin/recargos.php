@@ -5,7 +5,35 @@ if (!isset($_SESSION['priv'])){
    header('Location: /');
  } 
 include("../../mod/nav.php");
-if (isset($_GET['referencia']) && !empty($_GET['referencia'])){?>
+if (isset($_GET['referencia']) && !empty($_GET['referencia'])){
+    $referencia = $_GET['referencia'];
+$sql = "SELECT r.*, c.identificacion, c.nombres, c.apellidos FROM recargos r LEFT JOIN clientes c ON r.cliente = c.id WHERE r.referencia = '$referencia'";
+$resultado = $conex->query($sql);
+if ($resultado->num_rows > 0) {
+    while ($fila = $resultado->fetch_assoc()) {
+        $data_id = $fila['id'];
+        $data_referencia = $fila['referencia'];
+        $data_fecha = $fila['fecha'];
+        $data_hora = $fila['hora'];
+        $data_cliente = $fila['cliente'];
+        $data_identificacion = $fila['identificacion'];
+        $data_nombres = $fila['nombres'];
+        $data_apellidos = $fila['apellidos'];
+        $data_sub_total = $fila['sub_total'];
+        $data_iva = $fila['iva'];
+        $data_total = $fila['total'];
+        if($fila['estado'] == '1'){
+          $data_estado = '<a class="btn btn-success w-100">Aprobado</a>';
+          $data_estado_editar = '<a id="anular_estado" data-ref="' . $data_referencia . '" data-total="' . $data_total . '" data-cliente="' . $data_cliente . '"   class="btn btn-danger w-100">Anular</a>';
+
+      }else{
+          $data_estado = '<a class="btn btn-danger w-100">Anulado</a>';
+          $data_estado_editar = '';
+      }
+    }
+}
+
+?>
 <main id="main" class="main">
 
 <div class="pagetitle">
@@ -26,91 +54,98 @@ if (isset($_GET['referencia']) && !empty($_GET['referencia'])){?>
                 <h6 class="fw-bold border-bottom pb-2">Cliente</h6>
                 <div class="mb-2">
                     <label class="fw-bold">Identificación:</label>
-                    <input readonly type="text" id="n_identificacion" class="form-control" placeholder="Identificación">
+                    <input readonly type="text" value="<?= $data_identificacion ?>" id="identificacion" class="form-control" placeholder="Identificación">
                 </div>
                 <div class="mb-2">
                     <label class="fw-bold">Nombres:</label>
-                    <input readonly type="text" id="n_nombres" class="form-control" placeholder="Nombres">
+                    <input readonly type="text" value="<?= $data_nombres ?>" id="nombres" class="form-control" placeholder="Nombres">
                 </div>
                 <div class="mb-2">
                     <label class="fw-bold">Apellidos:</label>
-                    <input readonly type="text" id="n_apellidos" class="form-control" placeholder="Apellidos">
+                    <input readonly type="text" value="<?= $data_apellidos ?>" id="apellidos" class="form-control" placeholder="Apellidos">
                 </div>
             </div>
             <div class="col-md-6">
                 <h6 class="fw-bold border-bottom pb-2">Factura de Venta</h6>
                 <div class="mb-2">
                     <label class="fw-bold">Referencia:</label>
-                    <input readonly type="text" id="referencia" class="form-control" placeholder="Referencia">
+                    <input readonly type="text" value="<?= $data_referencia ?>" id="referencia" class="form-control" placeholder="Referencia">
                 </div>
-                <div class="mb-2">
+                <div class="row">
+                  <div class="col-6">
+                  <div class="mb-2">
                     <label class="fw-bold">Fecha:</label>
-                    <input readonly type="text" id="n_fecha" class="form-control" placeholder="Fecha">
+                    <input readonly type="text" value="<?= $data_fecha ?>" id="fecha" class="form-control" placeholder="Fecha">
                 </div>
-                <div class="mb-2">
+                  </div>
+                  <div class="col-6">
+                    <div class="mb-2">
                     <label class="fw-bold">Hora:</label>
-                    <input readonly type="text" id="n_hora" class="form-control" placeholder="Hora">
+                    <input readonly type="text" value="<?= $data_hora ?>" id="hora" class="form-control" placeholder="Hora">
+                </div></div>
                 </div>
+
                 <div class="mb-2">
-                    <label class="fw-bold">Total:</label>
-                    <input readonly type="text" id="n_saldo" class="form-control" placeholder="Saldo">
+                    <label class="fw-bold">Estado:</label>
+                    <?= $data_estado ?>
                 </div>
+               
+                
             </div>
         </div>
 
         <!-- Tabla de Detalles -->
         <div class="row mt-4">
             <div class="col-12">
-                <h6 class="fw-bold border-bottom pb-2">Detalles</h6>
+            <h6 class="fw-bold border-bottom pb-2">Detalles</h6>
+            <div class="hscroll">
                 <table class="table table-bordered">
                     <thead class="table-light">
                         <tr>
-                            <th>Código</th>
                             <th>Descripción</th>
-                            <th>Cant</th>
-                            <th>Valor Unitario</th>
-                            <th>Valor Total</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>02000100001</td>
-                            <td>Servicios a terceros</td>
-                            <td>1</td>
-                            <td>$1,500,000.00</td>
-                            <td>$1,500,000.00</td>
+                            <td>Recarga de saldo</td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
             </div>
         </div>
 
         <!-- Totales -->
         <div class="row">
-            <div class="col-md-6 offset-md-6">
+            <div class="col-md-6 order-md-1 order-2">
+                <a id="factura" data-ref="<?= $_GET['referencia'] ?>" class="btn btn-primary w-100 mb-2"><i class="bx bxs-file-pdf me-2"></i>Factura</a>
+            <?= $data_estado_editar ?>
+              </div>
+            <div class="col-md-6 order-md-2 order-1">
                 <table class="table table-borderless">
                     <tbody>
                         <tr>
                             <th>Total Bruto:</th>
-                            <td class="text-end">$1,500,000.00</td>
+                            <td class="text-end">$<?= $data_sub_total ?></td>
                         </tr>
                         <tr>
                             <th>IVA (13%):</th>
-                            <td class="text-end">$286,000.00</td>
+                            <td class="text-end">$<?= $data_iva ?></td>
                         </tr>
                         <tr class="fw-bold">
                             <th>Total a Pagar:</th>
-                            <td class="text-end">$1,747,500.00</td>
+                            <td class="text-end">$<?= $data_total ?></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+           
         </div>
 
         <!-- Notas -->
         <div class="row">
             <div class="col-12">
-                <p class="border-top pt-3">
+                <p class="border-top pt-3 text-center">
                     <strong>Condiciones de Pago:</strong> Crédito o efectivo según negociado. 
                     <br>
                     Recuerde consultar su cuenta para verificar si el pago fue realizado.
@@ -141,7 +176,7 @@ if (isset($_GET['referencia']) && !empty($_GET['referencia'])){?>
 <div class="row">
 
   <div class="col-md-6 mb-2">
-    <a id="n_nuevo_cliente" data-bs-toggle="modal" data-bs-target="#nuevo_cliente" class="btn btn-primary w-100"><i class=" bi bi-person-plus-fill me-2"></i>Nuevo Cliente</a>
+    <a id="n_nuevo_recargo" data-bs-toggle="modal" data-bs-target="#nuevo_recargo" class="btn btn-primary w-100"><i class="bx bxs-factory me-2"></i>Nuevo Recargo</a>
   </div>
   
   <div class="col-md-6 mb-2">
@@ -174,8 +209,13 @@ if (isset($_GET['referencia']) && !empty($_GET['referencia'])){?>
     <input Placeholder="Apellidos" type="text" id="apellidos" class="border-primary form-control custom-input ">
   </div> 
   
-
-
+  <div class="col-md mb-2">
+    <select id="estado" name="estado" class="border-primary form-control custom-input " onchange="sede()"  >
+    <option value="">Estado</option>
+    <option value="1">Aprobado</option>
+    <option value="2">Anulado</option>
+    </select>
+  </div>
 
   
 
@@ -192,6 +232,7 @@ if (isset($_GET['referencia']) && !empty($_GET['referencia'])){?>
                         <th clasas="">Nombres</th>
                         <th clasas="">Apellidos</th>
                         <th clasas="">Saldo</th>
+                        <th clasas="">Estado</th>
                     </tr>
                 </thead>
                 <tbody id="resultadoBusqueda">
@@ -207,73 +248,26 @@ if (isset($_GET['referencia']) && !empty($_GET['referencia'])){?>
 
 
 
-<div class="modal fade" id="nuevo_cliente" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-fullscreen p-3">
+<div class="modal fade" id="nuevo_recargo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-4" id="exampleModalFullscreenLabel"></h1>
+        <h1 class="modal-title fs-4" id="exampleModalFullscreenLabel">Nuevo Recargo</h1>
       </div>
       <div class="modal-body">
 
-      <div class="row">
-                
-                <div class="col-sm-12 col-md-4">
+        <div class="mb-2 mb-3">
+            <input type="password" id="r_cliente" class="form-control" placeholder="CODIGO CLIENTE">
+        </div>
 
-                    <div class="p-3">
-                        <label >Identificacion</label>
-                        <input  type="text" id="n_identificacion"  class="border-primary form-control custom-input" Placeholder="Identificacion">
-                    </div>
-                    <div class="p-3">
-                        <label >Nombres</label>
-                        <input  type="text" id="n_nombres" class="border-primary form-control custom-input" Placeholder="Nombres">
-                    </div>
-                    <div class="p-3">
-                        <label >Apellidos</label>
-                        <input  type="text" id="n_apellidos" class="border-primary form-control custom-input" Placeholder="Apellidos">
-                    </div>
-                  
-                </div>
+        <div class="data_nuevo_recargo"  id="data_nuevo_recargo"></div>
 
-                <div class="col-sm-12 col-md-4">
-                    <div class="p-3">
-                        <label >Direccion</label>
-                        <input  type="text" id="n_direccion" class="border-primary form-control custom-input" Placeholder="Direccion">
-                    </div>
-                    <div class="p-3">
-                        <label >Fecha de registro</label>
-                        <input readonly type="text" id="n_fecha_registro" class="border-primary form-control custom-input" Placeholder="Fecha de registro">
-                    </div>
-                    <div class="p-3">
-                        <label >Saldo</label>
-                        <input  type="text" id="n_saldo" class="border-primary form-control custom-input" Placeholder="Saldo">
-                    </div>
-                   
-                </div>
+        </div>
+            
 
-                <div class="col-sm-12 col-md-4">
-                    <div class="p-3">
-                        <label >Correo</label>
-                        <input  type="mail" id="n_correo_electronico" class="border-primary form-control custom-input" Placeholder="Correo">
-                    </div>
-                    <div class="p-3">
-                        <label >Telefono</label>
-                        <input  type="text" id="n_telefono" class="border-primary form-control custom-input" Placeholder="Telefono">
-                    </div>
 
-                    <div class="p-3">
-                        <label >Estado</label>
-                        <div id="n_estado">
-                        <a id="n_estado_data" value="1" class="btn btn-success w-100" ><i class="bi bi-check-circle me-2"></i>Activo</a>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-      </div>
-      <div class="modal-footer">
+      <div class="modal-footer" id="data_footer_nuevo_recargo">
         <a type="button" id="cancelar" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-square me-2"></i>Cancelar</a>
-        <a type="button" id="n_guardar" class="btn btn-primary" data-bs-dismiss="modal"><i class="bi bi-floppy me-2"></i>Guardar nuevo cliente</a>
       </div>
     </div>
   </div>

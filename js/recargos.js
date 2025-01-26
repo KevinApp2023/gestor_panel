@@ -13,7 +13,8 @@ $.ajax({
         fecha_final: document.getElementById('fecha_final').value,
         identificacion: document.getElementById('identificacion').value,
         nombres: document.getElementById('nombres').value,
-        apellidos: document.getElementById('apellidos').value
+        apellidos: document.getElementById('apellidos').value,
+        estado: document.getElementById('estado').value
 
     },
     success: function(response) {
@@ -28,6 +29,72 @@ $(document).ready(function() {
     });
 });
 
+
+
+$(document).ready(function() {
+    $('#r_cliente').keypress(function(event) {
+        if (event.which === 13) {
+            var id = $('#r_cliente').val();
+            var data_nuevo_recargo = `
+        <div class="mb-3">
+                <h6 class="fw-bold border-bottom pb-2">Cliente</h6>
+                <div class="mb-2">
+                    <label class="fw-bold text-secondary">Identificación:</label>
+                    <input readonly type="text"  id="r_identificacion" class="form-control" placeholder="Identificación">
+                </div>
+                <div class="mb-2">
+                    <label class="fw-bold text-secondary">Nombres:</label>
+                    <input readonly type="text"  id="r_nombres" class="form-control" placeholder="Nombres">
+                </div>
+                <div class="mb-2">
+                    <label class="fw-bold text-secondary">Apellidos:</label>
+                    <input readonly type="text"  id="r_apellidos" class="form-control" placeholder="Apellidos">
+                </div>
+                <div class="mb-2">
+                    <label class="fw-bold text-secondary">Saldo:</label>
+                    <input readonly type="text"  id="r_saldo" class="form-control" placeholder="Saldo">
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <h6 class="fw-bold border-bottom pb-2">Factura de Venta</h6>
+                <div class="mb-2">
+                    <label class="fw-bold">SubTotal</label>
+                    <input  type="number" id="sub_total" class="form-control" placeholder="0">
+                </div>
+            </div>`;
+
+            var data_footer_nuevo_recargo = `   <a type="button" id="cancelar" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-square me-2"></i>Cancelar</a>
+        <a type="button" id="guardar" class="btn btn-success" data-bs-dismiss="modal"><i class="bi bi-cash-coin me-2"></i>Registrar</a>`;
+            
+            $('#r_cliente').val(id);
+            $('#data_nuevo_recargo').html(data_nuevo_recargo);
+            $('#data_footer_nuevo_recargo').html(data_footer_nuevo_recargo);
+            $.ajax({
+                url: '/mi/src/consultar_cliente',
+                method: 'POST',
+                data: { id: id },
+                dataType: 'json',
+                success: function(data) {
+                    
+                    $('#r_identificacion').val(data.identificacion);
+                    $('#r_nombres').val(data.nombres);
+                    $('#r_apellidos').val(data.apellidos);
+                    $('#r_saldo').val(data.saldo);
+    
+                },
+                error: function() {
+                    console.log('Error en la solicitud AJAX');
+                }
+            });
+                
+
+  
+        }
+    });
+  });
+
+
 $(document).ready(function () {
     $(document).on('click', '#factura', function (event) {
         var factura = event.target.getAttribute("data-ref");
@@ -41,69 +108,14 @@ $(document).ready(function () {
             link.download = 'Factura_Ticket.pdf';
             link.click();
         } else {
-            // En PC, abrir en otra pestaña
             window.open(url, '_blank');
         }
     });
 });
 
 
-
-$(document).ready(function() {
-    $(document).on('click', '#editar', function(event) {
-        var id = event.target.getAttribute("value");
-        $('#guardar').attr('value', '');
-        $('#estado_data').attr('value', '');
-        $('#eliminar').attr('value', '');
-        $('#exampleModalFullscreenLabel').html('');
-        $('#b_identificacion').val('');
-        $('#b_nombres').val('');
-        $('#b_apellidos').val('');
-        $('#b_direccion').val('');
-        $('#b_fecha_registro').val('');
-        $('#b_saldo').val('');
-        $('#b_telefono').val('');
-        $('#b_correo_electronico').val('');
-
-        
-        
-        $.ajax({
-            url: '/mi/src/consultar_cliente',
-            method: 'POST',
-            data: { id: id },
-            dataType: 'json',
-            success: function(data) {
-                
-                $('#guardar').attr('value', id);
-                $('#eliminar').attr('value', id);
-                $('#exampleModalFullscreenLabel').html(data.nombres + " " + data.apellidos);
-                $('#b_identificacion').val(data.identificacion);
-                $('#b_nombres').val(data.nombres);
-                $('#b_apellidos').val(data.apellidos);
-                $('#b_direccion').val(data.direccion);
-                $('#b_fecha_registro').val(data.fecha_registro);
-                $('#b_saldo').val(data.saldo);
-                $('#b_telefono').val(data.telefono);
-                $('#b_correo_electronico').val(data.correo_electronico);
-
-                if (data.estado == 1) {
-                    $('#b_estado').html('<a id="estado_data" value="1" class="btn btn-success w-100" ><i class="bi bi-check-circle me-2"></i>Activo</a>');
-                }else{
-                    $('#b_estado').html('<a id="estado_data" value="2" class="btn btn-danger w-100"><i class="bi bi-x-circle me-2"></i>Suspendido</a>');
-                }
-            },
-            error: function() {
-                console.log('Error en la solicitud AJAX');
-            }
-        });
-    });
-});
-
-
 $(document).ready(function() {
     $(document).on('click', '#guardar', function(event) {
-        var id = event.target.getAttribute("value");
-        var estado = $('#estado_data').attr('value')
         Swal.fire({
             title: "¿Quieres guardar los cambios?",
             showDenyButton: true,
@@ -115,20 +127,12 @@ $(document).ready(function() {
             if (result.isConfirmed) {
               
                     var form_data = new FormData();
-                    form_data.append('id', id);
-                    form_data.append('identificacion', $('#b_identificacion').val());
-                    form_data.append('nombres', $('#b_nombres').val());
-                    form_data.append('apellidos', $('#b_apellidos').val());
-                    form_data.append('direccion', $('#b_direccion').val());
-                    form_data.append('fecha_registro', $('#b_fecha_registro').val());
-                    form_data.append('saldo', $('#b_saldo').val());
-                    form_data.append('correo_electronico', $('#b_correo_electronico').val());
-                    form_data.append('telefono', $('#b_telefono').val());
-                    form_data.append('estado', estado);
+                    form_data.append('cliente', $('#r_cliente').val());
+                    form_data.append('sub_total', $('#sub_total').val());
                   
                 $.ajax({
                     type: "POST",
-                    url: "/mi/src/editar_cliente",
+                    url: "/mi/src/guardar_recargo",
                     data: form_data,
                     contentType: false,
                     processData: false,
@@ -173,98 +177,32 @@ $(document).ready(function() {
 
 
 $(document).ready(function() {
-    $(document).on('click', '#n_guardar', function(event) {
-        var estado = $('#n_estado_data').attr('value')
+    $(document).on('click', '#anular_estado', function (event) {
+        var cliente = event.target.getAttribute("data-cliente");
+        var ref = event.target.getAttribute("data-ref");
+        var total = event.target.getAttribute("data-total");
         Swal.fire({
-            title: "¿Quieres guardar los cambios?",
-            showDenyButton: true,
-            showCancelButton: true,
-            confirmButtonText: "Guardar",
-            denyButtonText: `No guardar`,
-            icon: "question",
-        }).then((result) => {
-            if (result.isConfirmed) {
-              
-                    var form_data = new FormData();
-                    form_data.append('identificacion', $('#n_identificacion').val());
-                    form_data.append('nombres', $('#n_nombres').val());
-                    form_data.append('apellidos', $('#n_apellidos').val());
-                    form_data.append('direccion', $('#n_direccion').val());
-                    form_data.append('fecha_registro', $('#n_fecha_registro').val());
-                    form_data.append('saldo', $('#n_saldo').val());
-                    form_data.append('correo_electronico', $('#n_correo_electronico').val());
-                    form_data.append('telefono', $('#n_telefono').val());
-                    form_data.append('estado', estado);
-                  
-                $.ajax({
-                    type: "POST",
-                    url: "/mi/src/guardar_cliente",
-                    data: form_data,
-                    contentType: false,
-                    processData: false,
-                    success: function(response) {
-                        $('body').append(response);
-                        const Toast = Swal.mixin({
-                            toast: true,
-                            position: "top-end",
-                            showConfirmButton: false,
-                            timer: 3000,
-                            timerProgressBar: true,
-                            didOpen: (toast) => {
-                                toast.onmouseenter = Swal.stopTimer;
-                                toast.onmouseleave = Swal.resumeTimer;
-                            }
-                        });
-                        if (response == '1'){
-                            Toast.fire({
-                                icon: "success",
-                                title: "Datos guardados con exito"
-                            });
-                        }else  if (response == '2'){
-                            Toast.fire({
-                                icon: "error",
-                                title: "Error al guardados los datos"
-                            });
-                        }
-                    }
-                }).then(() => {
-                   filtrar();
-                });
-            
-
-            } else if (result.isDenied) {
-                Swal.fire("Los cambios no se guardan", "", "info");
-            }
-        });
-
-    });
-});
-
-
-
-
-$(document).ready(function() {
-    $(document).on('click', '#eliminar', function(event) {
-        var id = event.target.getAttribute("value");
-        Swal.fire({
-            title: "¿Estás seguro de que deseas eliminar este registro?",
+            title: "¿Estás seguro de que deseas anular este recargo?",
             text: "Esta acción no se puede deshacer.",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonText: "Sí, eliminar",
+            confirmButtonText: "Sí, anular",
             cancelButtonText: "Cancelar"
         }).then((result) => {
             if (result.isConfirmed) {
-                var form_data = new FormData();
-                form_data.append('id', id);
-
+                    var form_data = new FormData();
+                    form_data.append('cliente', cliente);
+                    form_data.append('ref', ref);
+                    form_data.append('total', total);
+                  
                 $.ajax({
                     type: "POST",
-                    url: "/mi/src/eliminar_cliente",
+                    url: "/mi/src/anular_recargo",
                     data: form_data,
                     contentType: false,
                     processData: false,
                     success: function(response) {
+                        $('body').append(response);
                         const Toast = Swal.mixin({
                             toast: true,
                             position: "top-end",
@@ -276,28 +214,35 @@ $(document).ready(function() {
                                 toast.onmouseleave = Swal.resumeTimer;
                             }
                         });
-                        if (response == '1') {
+                        if (response == '1'){
                             Toast.fire({
                                 icon: "success",
-                                title: "Registro eliminado con éxito"
-                            });
-                        } else if (response == '2') {
+                                title: "Recargo anulado con exito"
+                            }).then(() => {
+                                location.reload();
+                             });
+                        }else  if (response == '2'){
                             Toast.fire({
                                 icon: "error",
-                                title: "Error al eliminar el registro"
-                            });
+                                title: "Error al anular el recargo"
+                            }).then(() => {
+                                location.reload();
+                             });
                         }
                     }
-                }).then(() => {
-                    filtrar();
                 });
+            
+
+            } else if (result.isDenied) {
+                Swal.fire("Los cambios no se guardan", "", "info");
             }
         });
+
     });
 });
 
 
-    
+
 
 $(document).ready(function() {
     $(document).on('click', '#cancelar', function(event) {
@@ -318,46 +263,6 @@ $(document).ready(function() {
         $('#b_foto').attr('src', '');
     });
 });
-
-
-$(document).ready(function() {
-    $(document).on('click', '#estado_data', function() {
-        const estado_data = document.getElementById("estado_data");
-        if (estado_data) {
-            if (estado_data.classList.contains("btn-danger")) {
-                estado_data.classList.remove("btn-danger");
-                estado_data.classList.add("btn-success");
-                estado_data.setAttribute("value", "1");
-                estado_data.innerHTML = '<i class="bi bi-check-circle me-2"></i>Activo';
-            } else {
-                estado_data.classList.add("btn-danger");
-                estado_data.classList.remove("btn-Success");
-                estado_data.setAttribute("value", "2");
-                estado_data.innerHTML = '<i class="bi bi-x-circle me-2"></i>Suspendido';
-            }
-        }
-    });
-});
-
-$(document).ready(function() {
-    $(document).on('click', '#n_estado_data', function() {
-        const estado_data = document.getElementById("n_estado_data");
-        if (estado_data) {
-            if (estado_data.classList.contains("btn-danger")) {
-                estado_data.classList.remove("btn-danger");
-                estado_data.classList.add("btn-success");
-                estado_data.setAttribute("value", "1");
-                estado_data.innerHTML = '<i class="bi bi-check-circle me-2"></i>Activo';
-            } else {
-                estado_data.classList.add("btn-danger");
-                estado_data.classList.remove("btn-Success");
-                estado_data.setAttribute("value", "2");
-                estado_data.innerHTML = '<i class="bi bi-x-circle me-2"></i>Suspendido';
-            }
-        }
-    });
-});
-
 
 
 

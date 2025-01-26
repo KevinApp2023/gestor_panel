@@ -194,7 +194,7 @@ $(document).ready(function() {
                                 toast.onmouseleave = Swal.resumeTimer;
                             }
                         });
-                        if (response == '1'){
+                        if (response !== '2'){
                             Toast.fire({
                                 icon: "success",
                                 title: "Datos guardados con exito"

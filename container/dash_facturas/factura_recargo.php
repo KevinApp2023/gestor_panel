@@ -9,6 +9,7 @@ if ($resultado->num_rows > 0) {
         $data_referencia = $fila['referencia'];
         $data_fecha = $fila['fecha'];
         $data_hora = $fila['hora'];
+        $data_cliente = $fila['cliente'];
         $data_identificacion = $fila['identificacion'];
         $data_nombres = $fila['nombres'];
         $data_apellidos = $fila['apellidos'];
@@ -20,7 +21,7 @@ if ($resultado->num_rows > 0) {
 
 require "../../vendor/pdf/code128.php";
 
-$pdf = new PDF_Code128('P', 'mm', [80, 250]);
+$pdf = new PDF_Code128('P', 'mm', [80, 300]);
 $pdf->SetMargins(5, 5, 5);
 $pdf->AddPage();
 
@@ -58,7 +59,13 @@ $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(0, 5, "CC: $data_identificacion", 0, 1);
 $pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Nombres: $data_nombres"), 0, 1);
 $pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Apellidos: $data_apellidos"), 0, 1);
-$pdf->Ln(2);
+$pdf->Ln(3);
+
+$pdf->SetFont('Arial', 'B', 10);
+$pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "QR CLIENTE"), 0, 1, 'C');
+$pdf->Image("../../qr_cliente/$data_cliente.png", $imgX, 115, $imgWidth);
+$pdf->Ln(60);
+
 
 
 // Detalle de la transacción
