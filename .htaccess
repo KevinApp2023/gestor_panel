@@ -13,6 +13,8 @@ RewriteRule ^admin/recargos/([^/]+)$ /container/dash_admin/recargos.php?referenc
 RewriteRule ^admin/clientes$ /container/dash_admin/clientes.php [L,QSA]
 RewriteRule ^admin/bonos$ /container/dash_admin/bonos.php [L,QSA]
 RewriteRule ^admin/usuarios$ /container/dash_admin/usuarios.php [L,QSA]
+RewriteRule ^admin/canchas$ /container/dash_admin/canchas.php [L,QSA]
+RewriteRule ^admin/canchas/([^/]+)$ /container/dash_admin/canchas.php?id=$1 [L,QSA]
 
 
 #dash_facturas
@@ -40,6 +42,8 @@ RewriteRule ^mi/src/usuarios$ /src/usuarios.php [L,QSA]
 RewriteRule ^mi/src/consultar_usuario$ /src/consultar_usuario.php [L,QSA]
 RewriteRule ^mi/src/editar_usuario$ /src/editar_usuario.php [L,QSA]
 RewriteRule ^mi/src/eliminar_usuario$ /src/eliminar_usuario.php [L,QSA]
+RewriteRule ^mi/src/guardar_cancha$ /src/guardar_cancha.php [L,QSA]
+RewriteRule ^mi/src/canchas$ /src/canchas.php [L,QSA]
 
 
 

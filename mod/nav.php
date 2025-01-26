@@ -252,6 +252,14 @@
     </a>
   </li>
 
+
+  <li class="nav-item">
+    <a class="nav-link " href="/admin/canchas">
+      <i class="bi bi-diagram-3"></i>
+      <span>Canchas</span>
+    </a>
+  </li>
+
   <li class="nav-item">
     <a class="nav-link " href="/admin/usuarios">
       <i class="ri ri-shield-user-line"></i>
