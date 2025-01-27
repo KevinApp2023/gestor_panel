@@ -10,9 +10,8 @@ if (isset($_POST['id']) && !empty($_POST['id'])) {
     $id_e = $_POST['id'];
     $id = desencriptar_datos($id_e, $clave_secreta);
 
-    $sql = "UPDATE reservas SET estado='4' WHERE id = '$id'";
+    $sql = "UPDATE reservas SET estado='4' WHERE id = '$id' AND estado = '1'";
     $resultado = $conex->query($sql);
-
     if ($resultado) {
         echo '1';
     } else {
