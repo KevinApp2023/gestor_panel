@@ -29,57 +29,6 @@ $(document).ready(function() {
 });
 
 
-$(document).ready(function() {
-    $(document).on('click', '#editar', function(event) {
-        var id = event.target.getAttribute("value");
-        $('#guardar').attr('value', '');
-        $('#estado_data').attr('value', '');
-        $('#eliminar').attr('value', '');
-        $('#exampleModalFullscreenLabel').html('');
-        $('#b_identificacion').val('');
-        $('#b_nombres').val('');
-        $('#b_apellidos').val('');
-        $('#b_direccion').val('');
-        $('#b_fecha_registro').val('');
-        $('#b_saldo').val('');
-        $('#b_telefono').val('');
-        $('#b_correo_electronico').val('');
-
-        
-        
-        $.ajax({
-            url: '/mi/src/consultar_cliente',
-            method: 'POST',
-            data: { id: id },
-            dataType: 'json',
-            success: function(data) {
-                
-                $('#guardar').attr('value', id);
-                $('#eliminar').attr('value', id);
-                $('#exampleModalFullscreenLabel').html(data.nombres + " " + data.apellidos);
-                $('#b_identificacion').val(data.identificacion);
-                $('#b_nombres').val(data.nombres);
-                $('#b_apellidos').val(data.apellidos);
-                $('#b_direccion').val(data.direccion);
-                $('#b_fecha_registro').val(data.fecha_registro);
-                $('#b_saldo').val(data.saldo);
-                $('#b_telefono').val(data.telefono);
-                $('#b_correo_electronico').val(data.correo_electronico);
-
-                if (data.estado == 1) {
-                    $('#b_estado').html('<a id="estado_data" value="1" class="btn btn-success w-100" ><i class="bi bi-check-circle me-2"></i>Activo</a>');
-                }else{
-                    $('#b_estado').html('<a id="estado_data" value="2" class="btn btn-danger w-100"><i class="bi bi-x-circle me-2"></i>Suspendido</a>');
-                }
-            },
-            error: function() {
-                console.log('Error en la solicitud AJAX');
-            }
-        });
-    });
-});
-
-
 
 $(document).ready(function() {
     $(document).on('click', '#fecha_inicio', async function() {
@@ -138,7 +87,7 @@ function mostrar_reserva(id){
             $('#de_cliente').html(data.nombres + " " + data.apellidos);
             $('#de_cantidad_horas').html(data.cantidad_horas);
             $('#de_total').html(data.total);
-            $('#de_cancha_eliminar').attr('value', data.id);
+            $('#cancha_eliminar').attr('value', data.id);
 
 
         },
