@@ -29,7 +29,7 @@ $valor_hora = $tablag['valor_hora'];
   <h1>Canchas</h1>
   <nav>
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/">Admin</a></li>
+      <li class="breadcrumb-item"><a href="/">Clientes</a></li>
       <li class="breadcrumb-item active">Canchas</li>
     </ol>
   </nav>
@@ -42,7 +42,9 @@ $valor_hora = $tablag['valor_hora'];
 
 
 <input id="cancha" value="<?= $_GET['id'] ?>" class="d-none">
+
 <div id="calendar" style="max-width: 100%; margin: 0 auto;"></div>
+
 
 
 
@@ -198,7 +200,7 @@ $valor_hora = $tablag['valor_hora'];
   <h1>Canchas</h1>
   <nav>
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/">Admin</a></li>
+      <li class="breadcrumb-item"><a href="/">Clientes</a></li>
       <li class="breadcrumb-item active">Canchas</li>
     </ol>
   </nav>

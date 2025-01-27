@@ -38,12 +38,31 @@ if ($tablag = mysqli_fetch_array($consult)) {
     $consult_saldo_cliente = "SELECT * FROM clientes WHERE id = '$id_cliente'";
     $consult_saldo_cliente = mysqli_query($conex, $consult_saldo_cliente);
     if ($tablag_saldo_cliente = mysqli_fetch_array($consult_saldo_cliente)) { 
-        $tablag_saldo_cliente['saldo'];
+        $saldo_cliente = $tablag_saldo_cliente['saldo'];
     }
 
-    if ($tablag_saldo_cliente >= $total ){
+    if ($saldo_cliente >= $total ){
 
-        
+
+     $consult_estado_canchas = "
+    SELECT * 
+    FROM reservas 
+    WHERE id_cancha = '$id_cancha' AND r_fecha = '$r_fecha' 
+      AND (
+          (r_hora_inicio <= '$r_hora_inicio' AND r_hora_final > '$r_hora_inicio') OR 
+          (r_hora_inicio < '$r_hora_final' AND r_hora_final >= '$r_hora_final') OR 
+          (r_hora_inicio >= '$r_hora_inicio' AND r_hora_final <= '$r_hora_final')
+      )
+";
+
+$consult_estado_canchas = mysqli_query($conex, $consult_estado_canchas);
+
+if (mysqli_num_rows($consult_estado_canchas) > 0) {
+echo '4';
+} else {
+  
+
+   
     
     $sql = "INSERT INTO reservas (
         referencia, 
@@ -94,8 +113,17 @@ if ($tablag = mysqli_fetch_array($consult)) {
         }
 
     } else {
-        echo '4'; 
+        echo '2'; 
     }
+
+
+
+
+}
+     
+
+
+
 
     }else{
         echo '3'; 

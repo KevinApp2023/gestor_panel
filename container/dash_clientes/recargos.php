@@ -40,8 +40,8 @@ if ($resultado->num_rows > 0) {
   <h1>Recargos</h1>
   <nav>
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/">Admin</a></li>
-      <li class="breadcrumb-item"><a href="/admin/recargos">Recargos</a></li>
+      <li class="breadcrumb-item"><a href="/">Clientes</a></li>
+      <li class="breadcrumb-item"><a href="/panel/recargos">Recargos</a></li>
       <li class="breadcrumb-item active"><?= $_GET['referencia'] ?></li>
     </ol>
   </nav>
@@ -165,7 +165,7 @@ if ($resultado->num_rows > 0) {
   <h1>Recargos</h1>
   <nav>
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/">Admin</a></li>
+      <li class="breadcrumb-item"><a href="/">Clientes</a></li>
       <li class="breadcrumb-item active">Recargos</li>
     </ol>
   </nav>

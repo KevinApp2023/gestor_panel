@@ -346,6 +346,7 @@ if (currentPath.includes('clientes/canchas/')){
                             }
                         }
                     }).then(() => {
+                        limpiar_input();
                         calendar();
                     });
                 }
@@ -353,6 +354,12 @@ if (currentPath.includes('clientes/canchas/')){
         });
     });
     
-
+function limpiar_input() {
+    $('#r_fecha').val('');
+    $('#r_hora_inicio').val('');
+    $('#r_hora_final').val('');
+    $('#r_cantidad_horas').val('');
+    $('#r_total').val('');
+}
 }
 
