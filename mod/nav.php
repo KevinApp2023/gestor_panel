@@ -28,12 +28,29 @@
               <hr class="dropdown-divider">
             </li>
 
+            <?php
+  if (isset($_SESSION['priv'])){
+      if ($_SESSION['priv'] == 1) { ?>
+
             <li>
               <a class="dropdown-item d-flex align-items-center" id="data_perfil" data-bs-toggle="modal" data-bs-target="#editar_perfil">
                 <i class="bi bi-person"></i>
                 <span>Mi Perfil</span>
               </a>
             </li>
+
+            <?php }else if ($_SESSION['priv'] == 3) { ?>
+              <li>
+              <a class="dropdown-item d-flex align-items-center" href="perfil">
+                <i class="bi bi-person"></i>
+                <span>Mi Perfil</span>
+              </a>
+            </li>
+
+            <?php }
+            } ?>
+
+
             <li>
               <hr class="dropdown-divider">
             </li>

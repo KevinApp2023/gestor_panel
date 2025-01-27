@@ -12,8 +12,8 @@ $fecha_registro = $_POST['fecha_registro'];
 $saldo = $_POST['saldo'];
 $estado = $_POST['estado'];
 
-$sql = "INSERT INTO clientes (identificacion, nombres, apellidos, correo_electronico, telefono, direccion, fecha_registro, saldo, estado) 
-        VALUES ('$identificacion', '$nombres', '$apellidos', '$correo_electronico', '$telefono', '$direccion', '$fecha_registro', '$saldo', '$estado')";
+$sql = "INSERT INTO clientes (identificacion, nombres, apellidos, correo_electronico, telefono, direccion, perfil, fecha_registro, saldo, estado) 
+        VALUES ('$identificacion', '$nombres', '$apellidos', '$correo_electronico', '$telefono', '$direccion', '', '$fecha_registro', '$saldo', '$estado')";
 
 $resultado = $conex->query($sql);
 

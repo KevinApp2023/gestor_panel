@@ -26,6 +26,7 @@ RewriteRule ^clientes/recargos/([^/]+)$ /container/dash_clientes/recargos.php?re
 RewriteRule ^clientes/canchas$ /container/dash_clientes/canchas.php [L,QSA]
 RewriteRule ^clientes/canchas/([^/]+)$ /container/dash_clientes/canchas.php?id=$1 [L,QSA]
 RewriteRule ^clientes/reservas$ /container/dash_clientes/reservas.php [L,QSA]
+RewriteRule ^clientes/perfil$ /container/dash_clientes/perfil.php [L,QSA]
 
 #dash_facturas
 RewriteRule ^facturas/recargos/([^/]+)$ /container/dash_facturas/factura_recargo.php?referencia=$1 [L,QSA]
@@ -58,6 +59,7 @@ RewriteRule ^mi/src/reservas$ /src/reservas.php [L,QSA]
 RewriteRule ^mi/src/consultar_reserva$ /src/consultar_reserva.php [L,QSA]
 RewriteRule ^mi/src/cancelar_reserva_cancha$ /src/cancelar_reserva_cancha.php [L,QSA]
 RewriteRule ^mi/src/reservar_cancha$ /src/reservar_cancha.php [L,QSA]
+RewriteRule ^mi/src/perfil$ /src/perfil.php [L,QSA]
 
 
 
