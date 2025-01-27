@@ -167,7 +167,7 @@ function mostrar_reserva(id){
             $('#cliente').html(data.nombres + " " + data.apellidos);
             $('#cantidad_horas').html(data.cantidad_horas);
             $('#total').html(data.total);
-            $('#camcha_eliminar').attr('value', data.id);
+            $('#cancha_eliminar').attr('value', data.id);
 
 
         },
@@ -183,7 +183,7 @@ function mostrar_reserva(id){
 
 
 $(document).ready(function() {
-    $(document).on('click', '#camcha_eliminar', function(event) {
+    $(document).on('click', '#cancha_eliminar', function(event) {
         var id = event.target.getAttribute("value");
         Swal.fire({
             title: "¿Estás seguro de que deseas eliminar esta reserva?",

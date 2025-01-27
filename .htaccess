@@ -15,6 +15,7 @@ RewriteRule ^admin/bonos$ /container/dash_admin/bonos.php [L,QSA]
 RewriteRule ^admin/usuarios$ /container/dash_admin/usuarios.php [L,QSA]
 RewriteRule ^admin/canchas$ /container/dash_admin/canchas.php [L,QSA]
 RewriteRule ^admin/canchas/([^/]+)$ /container/dash_admin/canchas.php?id=$1 [L,QSA]
+RewriteRule ^admin/reservas$ /container/dash_admin/reservas.php [L,QSA]
 
 
 #dash_facturas

@@ -261,6 +261,13 @@
   </li>
 
   <li class="nav-item">
+    <a class="nav-link " href="/admin/reservas">
+      <i class="bi bi-alarm"></i>
+      <span>Reservas</span>
+    </a>
+  </li>
+
+  <li class="nav-item">
     <a class="nav-link " href="/admin/usuarios">
       <i class="ri ri-shield-user-line"></i>
       <span>Usuarios</span>
