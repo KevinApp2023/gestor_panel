@@ -195,10 +195,12 @@ $(document).ready(function() {
                             }
                         });
                         if (response !== '2'){
-                            Toast.fire({
-                                icon: "success",
-                                title: "Datos guardados con exito"
-                            });
+                            var identificacion = $('#n_identificacion').val()
+                            Swal.fire({
+                                title: "Registro de cliente",
+                                text: "Contraseña por defecto: " + identificacion + ", recomendamos una vez iniciada la session actualizar la contraseña",
+                                icon: "success"
+                              });
                         }else  if (response == '2'){
                             Toast.fire({
                                 icon: "error",

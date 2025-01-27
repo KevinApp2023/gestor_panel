@@ -19,6 +19,19 @@ $resultado = $conex->query($sql);
 
 if ($resultado) {
     $recuperar_id = $conex->insert_id;
+    $nombres_usuario = $nombres . " " . $apellidos;
+
+    function encryptPassword($identificacion) {
+        return sha1($identificacion);
+    }
+    $password = encryptPassword($identificacion ?? '');
+    
+    $sql_crear_usuario = "INSERT INTO usuario (correo, nombres, pass, propietario, priv) 
+    VALUES ('$correo_electronico', '$nombres_usuario', '$password', '$recuperar_id', '3')";
+    $resultado_crear_usuario = $conex->query($sql_crear_usuario);
+    if ($resultado_crear_usuario) {}
+
+
     include("../config/openssl_decrypt_pass_cs.php");
     $iv = random_bytes(openssl_cipher_iv_length('aes-256-cbc'));
     $data = encriptar_datos($recuperar_id, $clave_secreta, $iv);

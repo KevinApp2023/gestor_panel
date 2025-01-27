@@ -14,7 +14,13 @@ if (isset($_POST['id']) && !empty($_POST['id'])) {
     $sql = "DELETE FROM clientes WHERE id = '$id'";
     $resultado = $conex->query($sql);
     if ($resultado) {
-        echo '1';
+        $sql = "DELETE FROM usuario WHERE propietario = '$id'";
+        $resultado = $conex->query($sql);
+        if ($resultado) {
+            echo '1';
+        } else {
+            echo '2';
+        }
     } else {
         echo '2';
     }
