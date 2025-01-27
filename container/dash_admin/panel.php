@@ -14,17 +14,17 @@ include("../../mod/head.php");
 
 
 <div class="pagetitle">
-  <h1>Dashboard</h1>
+  <h1>Panel</h1>
   <nav>
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/">Home</a></li>
-      <li class="breadcrumb-item active">Dashboard</li>
+      <li class="breadcrumb-item"><a href="/">Admin</a></li>
+      <li class="breadcrumb-item active">Panel</li>
     </ol>
   </nav>
 </div>
 
 <section class="section dashboard">
-  <div class="row">
+  <!-- <div class="row">
 
     <div class="col-lg-8">
       <div class="row">
@@ -640,7 +640,7 @@ include("../../mod/head.php");
 
     </div>
 
-  </div>
+  </div> -->
 </section>
 
 </main>
