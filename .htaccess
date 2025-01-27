@@ -45,6 +45,8 @@ RewriteRule ^mi/src/eliminar_usuario$ /src/eliminar_usuario.php [L,QSA]
 RewriteRule ^mi/src/guardar_cancha$ /src/guardar_cancha.php [L,QSA]
 RewriteRule ^mi/src/canchas$ /src/canchas.php [L,QSA]
 RewriteRule ^mi/src/reservas$ /src/reservas.php [L,QSA]
+RewriteRule ^mi/src/consultar_reserva$ /src/consultar_reserva.php [L,QSA]
+RewriteRule ^mi/src/cancelar_reserva_cancha$ /src/cancelar_reserva_cancha.php [L,QSA]
 
 
 

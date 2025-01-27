@@ -1235,3 +1235,27 @@ h6 {
 .hscroll {
   overflow-x: auto;
 }
+
+
+@media (max-width: 768px) {
+  .fc-toolbar-chunk {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; 
+  }
+
+  .fc-button {
+    flex: 1 1 calc(50% - 10px);
+    margin: 5px;
+    font-size: 14px; 
+  }
+
+  .fc-toolbar-title {
+    font-size: 16px;
+    text-align: center; 
+  }
+}
+.fc-toolbar {
+padding: 10px;
+}
+

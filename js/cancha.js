@@ -1,7 +1,14 @@
-
 document.addEventListener("DOMContentLoaded", function () {
     filtrar();
+    const currentPath = window.location.pathname + window.location.hash;
+        if (currentPath.includes('canchas/')){
+            calendar();
+        }
+   
 });
+
+
+
 
 function filtrar() {
 $.ajax({
@@ -77,14 +84,14 @@ $(document).ready(function() {
 });
 
 
-document.addEventListener('DOMContentLoaded', function() {
+function calendar(){
     var calendarEl = document.getElementById('calendar');
     var cancha = $('#cancha').val()
     var calendar = new FullCalendar.Calendar(calendarEl, {
       headerToolbar: {
         left: 'prevYear,prev,next,nextYear',
-        center: 'title',
-        right: 'dayGridMonth,dayGridWeek,dayGridDay,listWeek',
+        center: 'dayGridMonth,dayGridWeek,dayGridDay,listWeek',
+        right: 'title',
       },
   
       buttonText: {
@@ -97,26 +104,10 @@ document.addEventListener('DOMContentLoaded', function() {
   
       eventClick: function(info) {
         var eventObj = info.event;
-        Swal.fire({
-          title: eventObj.title,
-          html: `
-            <table style="width: 100%; border-collapse: collapse;">
-              <tr>
-                <th style="text-align: left; border: 1px solid #ddd; padding: 8px;">Cancha</th>
-                <td style="border: 1px solid #ddd; padding: 8px;">${info.event.extendedProps.cancha || 'No disponible'}</td>
-              </tr>
-              <tr>
-                <th style="text-align: left; border: 1px solid #ddd; padding: 8px;">Fecha y hora de inicio</th>
-                <td style="border: 1px solid #ddd; padding: 8px;">${info.event.start ? info.event.start.toLocaleString() : 'No disponible'}</td>
-              </tr>
-              <tr>
-                <th style="text-align: left; border: 1px solid #ddd; padding: 8px;">Fecha y hora final</th>
-                <td style="border: 1px solid #ddd; padding: 8px;">${info.event.end ? info.event.end.toLocaleString() : 'No disponible'}</td>
-              </tr>
-            </table>
-          `,
-        });
-      },
+        var id = eventObj.id; 
+            mostrar_reserva(id);
+    },
+    
   
       initialDate: new Date().toISOString().split('T')[0],
       navLinks: true,
@@ -135,8 +126,111 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   
     calendar.render();
-  });
-  
+
+  function toggleToolbarClass() {
+    var toolbar = document.querySelector('.fc-header-toolbar');
+    if (window.innerWidth <= 768) {
+      toolbar.classList.add('row');
+    } else {
+      toolbar.classList.remove('row');
+    }
+  }
+
+  toggleToolbarClass();
+
+  window.addEventListener('resize', toggleToolbarClass);
+
+
+}
+
+function mostrar_reserva(id){
+    
+    var modalReserva = new bootstrap.Modal(document.getElementById('reserva'), {
+        backdrop: 'static', 
+        keyboard: false
+    });
+    modalReserva.show();
+
+    $.ajax({
+        url: '/mi/src/consultar_reserva',
+        method: 'POST',
+        data: { id: id },
+        dataType: 'json',
+        success: function(data) {
+            
+            $('#data_modal_reserva_title').html(data.estado);
+            $('#referencia').html(data.referencia);
+            $('#r_cancha').html(data.nombre);
+            $('#fecha').html(data.r_fecha);
+            $('#hora_inicio').html(data.r_hora_inicio);
+            $('#hora_final').html(data.r_hora_final);
+            $('#cliente').html(data.nombres + " " + data.apellidos);
+            $('#cantidad_horas').html(data.cantidad_horas);
+            $('#total').html(data.total);
+            $('#camcha_eliminar').attr('value', data.id);
+
+
+        },
+        error: function() {
+            console.log('Error en la solicitud AJAX');
+        }
+    });
+
+}
 
 
 
+
+
+$(document).ready(function() {
+    $(document).on('click', '#camcha_eliminar', function(event) {
+        var id = event.target.getAttribute("value");
+        Swal.fire({
+            title: "¿Estás seguro de que deseas eliminar esta reserva?",
+            text: "Esta acción no se puede deshacer.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí, eliminar",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var form_data = new FormData();
+                form_data.append('id', id);
+
+                $.ajax({
+                    type: "POST",
+                    url: "/mi/src/cancelar_reserva_cancha",
+                    data: form_data,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        if (response == '1') {
+                            Toast.fire({
+                                icon: "success",
+                                title: "Reserva cancelada con éxito"
+                            });
+                        } else if (response == '2') {
+                            Toast.fire({
+                                icon: "error",
+                                title: "Error al eliminar la reserva"
+                            });
+                        }
+                    }
+                }).then(() => {
+                    calendar();
+                });
+            }
+        });
+    });
+});
