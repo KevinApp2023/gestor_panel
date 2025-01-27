@@ -1,6 +1,11 @@
 
 document.addEventListener("DOMContentLoaded", function () {
-    filtrar();
+    const currentPath = window.location.pathname + window.location.hash;
+    if (currentPath.includes('recargos/')){
+    }else{
+        filtrar();
+    }
+
 });
 
 function filtrar() {
@@ -29,6 +34,9 @@ $(document).ready(function() {
     });
 });
 
+
+const currentPath = window.location.pathname + window.location.hash;
+if (currentPath.includes('/admin/recargos')){
 
 
 $(document).ready(function() {
@@ -100,24 +108,6 @@ $(document).ready(function() {
   });
 
 
-$(document).ready(function () {
-    $(document).on('click', '#factura', function (event) {
-        var factura = event.target.getAttribute("data-ref");
-        var url = "/facturas/recargos/" + factura;
-
-        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-        if (isMobile) {
-            var link = document.createElement('a');
-            link.href = url;
-            link.download = 'Factura_Ticket.pdf';
-            link.click();
-        } else {
-            window.open(url, '_blank');
-        }
-    });
-});
-
 
 $(document).ready(function() {
     $(document).on('click', '#guardar', function(event) {
@@ -181,6 +171,55 @@ $(document).ready(function() {
     });
 });
 
+
+
+
+
+
+$(document).ready(function() {
+    $(document).on('click', '#cancelar', function(event) {
+        $('#guardar').attr('value', '');
+        $('#estado_data').attr('value', '');
+        $('#eliminar').attr('value', '');
+        $('#exampleModalFullscreenLabel').html('');
+        $('#b_codigo').val('');
+        $('#b_identificacion').val('');
+        $('#b_nombres').val('');
+        $('#b_apellidos').val('');
+        $('#b_entidad').val('');
+        $('#b_sede').val('');
+        $('#b_jornada').val('');
+        $('#b_grupo').val('');
+        $('#b_telefono').val('');
+        $('#b_correo').val('');
+        $('#b_foto').attr('src', '');
+    });
+});
+
+
+
+
+
+$(document).ready(function() {
+    $(document).on('click', '#qr_movil', function(event) {
+          const qrCamaraMovil = document.getElementById("qr_camara_movil");
+    if (qrCamaraMovil) {
+        if (qrCamaraMovil.classList.contains("d-none")) {
+            qrCamaraMovil.classList.remove("d-none");
+            qrCamaraMovil.classList.add("d-block", "d-lg-none");
+            $('#qr_movil').html('Ocultar Escáner QR Movil');
+
+        } else {
+            qrCamaraMovil.classList.add("d-none");
+            qrCamaraMovil.classList.remove("d-block", "d-lg-none");
+            $('#qr_movil').html('Abrir Escáner QR Movil');
+
+        }
+    }
+});
+});
+
+}
 
 
 $(document).ready(function() {
@@ -249,28 +288,23 @@ $(document).ready(function() {
 });
 
 
+$(document).ready(function () {
+    $(document).on('click', '#factura', function (event) {
+        var factura = event.target.getAttribute("data-ref");
+        var url = "/facturas/recargos/" + factura;
 
+        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-$(document).ready(function() {
-    $(document).on('click', '#cancelar', function(event) {
-        $('#guardar').attr('value', '');
-        $('#estado_data').attr('value', '');
-        $('#eliminar').attr('value', '');
-        $('#exampleModalFullscreenLabel').html('');
-        $('#b_codigo').val('');
-        $('#b_identificacion').val('');
-        $('#b_nombres').val('');
-        $('#b_apellidos').val('');
-        $('#b_entidad').val('');
-        $('#b_sede').val('');
-        $('#b_jornada').val('');
-        $('#b_grupo').val('');
-        $('#b_telefono').val('');
-        $('#b_correo').val('');
-        $('#b_foto').attr('src', '');
+        if (isMobile) {
+            var link = document.createElement('a');
+            link.href = url;
+            link.download = 'Factura_Ticket.pdf';
+            link.click();
+        } else {
+            window.open(url, '_blank');
+        }
     });
 });
-
 
 
 $(document).ready(function() {
@@ -303,24 +337,3 @@ function formatDate(date) {
     const [year, month, day] = date.split('-');
     return `${year}-${month}-${day}`;
 }
-
-
-
-$(document).ready(function() {
-    $(document).on('click', '#qr_movil', function(event) {
-          const qrCamaraMovil = document.getElementById("qr_camara_movil");
-    if (qrCamaraMovil) {
-        if (qrCamaraMovil.classList.contains("d-none")) {
-            qrCamaraMovil.classList.remove("d-none");
-            qrCamaraMovil.classList.add("d-block", "d-lg-none");
-            $('#qr_movil').html('Ocultar Escáner QR Movil');
-
-        } else {
-            qrCamaraMovil.classList.add("d-none");
-            qrCamaraMovil.classList.remove("d-block", "d-lg-none");
-            $('#qr_movil').html('Abrir Escáner QR Movil');
-
-        }
-    }
-});
-});

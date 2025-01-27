@@ -278,9 +278,23 @@
 
      }else if ($_SESSION['priv'] == 2) { 
 
-     }else if ($_SESSION['priv'] == 3) { 
+     }else if ($_SESSION['priv'] == 3) { ?>
+
+<li class="nav-item ">
+    <a class="nav-link active" href="/clientes/panel">
+      <i class="bi bi-grid"></i>
+      <span>Panel</span>
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link " href="/clientes/recargos">
+      <i class="bi bi-bank"></i>
+      <span>Recargos</span>
+    </a>
+  </li>
      
-    }
+   <?php }
 
 }
 

@@ -1,0 +1,2 @@
+console.log("%c¡Hola, desarrollador curioso! 🚀", "color: red; font-size: 30px; font-weight: bold;");
+console.log("%cEste sitio está protegido. Si estás explorando para aprender, ¡genial! Pero ten cuidado con lo que haces aquí. 😄", "color: gray; font-size: 20px;");

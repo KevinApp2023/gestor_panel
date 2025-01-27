@@ -18,6 +18,12 @@ RewriteRule ^admin/canchas/([^/]+)$ /container/dash_admin/canchas.php?id=$1 [L,Q
 RewriteRule ^admin/reservas$ /container/dash_admin/reservas.php [L,QSA]
 
 
+#dash_cliente
+RewriteRule ^clientes/panel$ /container/dash_clientes/panel.php [L,QSA]
+RewriteRule ^clientes/recargos$ /container/dash_clientes/recargos.php [L,QSA]
+RewriteRule ^clientes/recargos/([^/]+)$ /container/dash_clientes/recargos.php?referencia=$1 [L,QSA]
+
+
 #dash_facturas
 RewriteRule ^facturas/recargos/([^/]+)$ /container/dash_facturas/factura_recargo.php?referencia=$1 [L,QSA]
 
