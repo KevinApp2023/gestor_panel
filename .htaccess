@@ -22,7 +22,9 @@ RewriteRule ^admin/reservas$ /container/dash_admin/reservas.php [L,QSA]
 RewriteRule ^clientes/panel$ /container/dash_clientes/panel.php [L,QSA]
 RewriteRule ^clientes/recargos$ /container/dash_clientes/recargos.php [L,QSA]
 RewriteRule ^clientes/recargos/([^/]+)$ /container/dash_clientes/recargos.php?referencia=$1 [L,QSA]
-
+RewriteRule ^clientes/canchas$ /container/dash_clientes/canchas.php [L,QSA]
+RewriteRule ^clientes/canchas/([^/]+)$ /container/dash_clientes/canchas.php?id=$1 [L,QSA]
+RewriteRule ^clientes/reservas$ /container/dash_clientes/reservas.php [L,QSA]
 
 #dash_facturas
 RewriteRule ^facturas/recargos/([^/]+)$ /container/dash_facturas/factura_recargo.php?referencia=$1 [L,QSA]

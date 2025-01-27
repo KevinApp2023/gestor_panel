@@ -135,7 +135,7 @@ if($_SESSION['priv'] == '1'){
 } else if($_SESSION['priv'] == '3'){
   $where = "WHERE 1=1";
   $id_cliente = $_SESSION['propietario'];
-  $where .= "r.id_cliente = '$id_cliente'";
+  $where .= " AND r.id_cliente = '$id_cliente'";
   if (!empty($cancha)) { $where .= " AND c.nombre = '$cancha'"; }
   if (!empty($referencia)) { $where .= " AND r.referencia LIKE '%$referencia%'"; }
   if (!empty($fecha_inicio) && !empty($fecha_final)) {

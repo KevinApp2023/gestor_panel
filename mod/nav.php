@@ -294,6 +294,20 @@
     </a>
   </li>
      
+  <li class="nav-item">
+    <a class="nav-link " href="/clientes/canchas">
+      <i class="bi bi-diagram-3"></i>
+      <span>Canchas</span>
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link " href="/clientes/reservas">
+      <i class="bi bi-alarm"></i>
+      <span>Reservas</span>
+    </a>
+  </li>
+
    <?php }
 
 }

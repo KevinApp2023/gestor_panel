@@ -1,6 +1,7 @@
+const currentPath = window.location.pathname + window.location.hash;
+
 document.addEventListener("DOMContentLoaded", function () {
     filtrar();
-    const currentPath = window.location.pathname + window.location.hash;
         if (currentPath.includes('canchas/')){
             calendar();
         }
@@ -22,7 +23,7 @@ $.ajax({
 });
 }
 
-
+if (currentPath.includes('/admin/canchas')){
 $(document).ready(function() {
     $(document).on('click', '#cancha_guardar', function(event) {
         Swal.fire({
@@ -83,6 +84,7 @@ $(document).ready(function() {
     });
 });
 
+}
 
 function calendar(){
     var calendarEl = document.getElementById('calendar');
