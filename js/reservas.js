@@ -86,7 +86,7 @@ function mostrar_reserva(id){
             $('#de_hora_final').html(data.r_hora_final);
             $('#de_cliente').html(data.nombres + " " + data.apellidos);
             $('#de_cantidad_horas').html(data.cantidad_horas);
-            $('#de_total').html(data.total);
+            $('#de_total').html('$' + data.total);
             $('#cancha_eliminar').attr('value', data.id);
 
 

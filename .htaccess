@@ -56,6 +56,7 @@ RewriteRule ^mi/src/canchas$ /src/canchas.php [L,QSA]
 RewriteRule ^mi/src/reservas$ /src/reservas.php [L,QSA]
 RewriteRule ^mi/src/consultar_reserva$ /src/consultar_reserva.php [L,QSA]
 RewriteRule ^mi/src/cancelar_reserva_cancha$ /src/cancelar_reserva_cancha.php [L,QSA]
+RewriteRule ^mi/src/reservar_cancha$ /src/reservar_cancha.php [L,QSA]
 
 
 

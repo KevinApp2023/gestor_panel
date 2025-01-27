@@ -168,7 +168,7 @@ function mostrar_reserva(id){
             $('#hora_final').html(data.r_hora_final);
             $('#cliente').html(data.nombres + " " + data.apellidos);
             $('#cantidad_horas').html(data.cantidad_horas);
-            $('#total').html(data.total);
+            $('#total').html('$' + data.total);
             $('#cancha_eliminar').attr('value', data.id);
 
 
@@ -236,3 +236,123 @@ $(document).ready(function() {
         });
     });
 });
+
+
+
+
+
+
+if (currentPath.includes('clientes/canchas/')){
+
+    document.getElementById('r_hora_inicio').addEventListener('change', function () {
+        const horaInicio = this.value; 
+        console.log(`${horaInicio}:00`); 
+    });
+
+    document.getElementById('r_hora_final').addEventListener('change', function () {
+        const horaFinal = this.value; 
+        console.log(`${horaFinal}:00`); 
+    });
+
+    document.getElementById('calcular').addEventListener('click', function () {
+        var html_btn_guardar = ' <a type="button" id="reserva_guardar"  data-bs-dismiss="modal" class="btn btn-primary" ><i class="bi bi-floppy me-2"></i>Guardar</a>';
+        $('#btn_data_reservar').html(html_btn_guardar);
+          const horaInicio = document.getElementById('r_hora_inicio').value;
+          const horaFinal = document.getElementById('r_hora_final').value;
+          const valorHora = parseFloat(document.getElementById('r_valor_hora').value);
+  
+          if (!horaInicio || !horaFinal || isNaN(valorHora)) {
+              alert('Por favor, completa todos los campos correctamente.');
+              return;
+          }
+  
+          const [inicioHoras, inicioMinutos] = horaInicio.split(':').map(Number);
+          const [finalHoras, finalMinutos] = horaFinal.split(':').map(Number);
+  
+          const minutosInicio = inicioHoras * 60 + inicioMinutos;
+          const minutosFinal = finalHoras * 60 + finalMinutos;
+  
+          let diferenciaMinutos = minutosFinal - minutosInicio;
+          if (diferenciaMinutos < 0) {
+              diferenciaMinutos += 24 * 60; 
+          }
+          const cantidadHoras = (diferenciaMinutos / 60); 
+  
+          const total = (cantidadHoras * valorHora);
+  
+          document.getElementById('r_cantidad_horas').value = cantidadHoras;
+          document.getElementById('r_total').value = total;
+          
+      });
+
+
+      $(document).ready(function() {
+        $(document).on('click', '#reserva_guardar', function(event) {
+            
+       
+            Swal.fire({
+                title: "¿Quieres registrar la cancha?",
+                icon: "question",
+                showCancelButton: true,
+                confirmButtonText: "Sí, Registrar",
+                cancelButtonText: "Cancelar"
+            }).then((result) => {
+                if (result.isConfirmed) {
+
+                    var form_data = new FormData();
+                    form_data.append('id', $('#data_cancha_get').attr('value'));
+                    form_data.append('r_fecha', $('#r_fecha').val());
+                    form_data.append('r_hora_inicio', $('#r_hora_inicio').val());
+                    form_data.append('r_hora_final', $('#r_hora_final').val());
+    
+                    $.ajax({
+                        type: "POST",
+                        url: "/mi/src/reservar_cancha",
+                        data: form_data,
+                        contentType: false,
+                        processData: false,
+                        success: function(response) {
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: "top-end",
+                                showConfirmButton: false,
+                                timer: 3000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                    toast.onmouseenter = Swal.stopTimer;
+                                    toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                            if (response == '1') {
+                                Toast.fire({
+                                    icon: "success",
+                                    title: "Reserva guardada con éxito"
+                                });
+                            } else if (response == '2') {
+                                Toast.fire({
+                                    icon: "error",
+                                    title: "Error al guardada la reserva"
+                                });
+                            } else if (response == '3') {
+                                Toast.fire({
+                                    icon: "warning",
+                                    title: "Alerta, Saldo insuficiente"
+                                });
+                            } else if (response == '4') {
+                                Toast.fire({
+                                    icon: "info",
+                                    title: "Error, Ya se encuentra reservado"
+                                });
+                            }
+                        }
+                    }).then(() => {
+                        calendar();
+                    });
+                }
+            });
+        });
+    });
+    
+
+}
+

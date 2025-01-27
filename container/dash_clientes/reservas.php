@@ -22,7 +22,11 @@ include("../../mod/nav.php");?>
   
 <div class="row">
   
-  <div class="col-md-12 mb-2">
+<div class="col-md-6 mb-2">
+    <a href="canchas" class="btn btn-primary w-100"><i class="bi bi-alarm me-2"></i>Nueva Reserva</a>
+  </div>
+
+  <div class="col-md-6 mb-2">
     <a id="aplicar_filtro" class="btn btn-primary w-100"><i class=" bi bi-filter-square-fill me-2"></i>Aplicar Filtro</a>
   </div>
 
