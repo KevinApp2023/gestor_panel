@@ -31,8 +31,8 @@ if (isset($_SESSION['priv'])){
 
               <div class="d-flex justify-content-center py-4">
                 <a href="/" class="logo d-flex align-items-center w-auto">
-                  <img src="/img/logo.png" alt="">
-                  <span class="d-none d-lg-block">Gestor Padel</span>
+                  <img src="<?= $icon ?>" alt="">
+                  <span class="d-none d-lg-block"><?= $title ?></span>
                 </a>
               </div>
               <div class="card mb-3 pt-4">
