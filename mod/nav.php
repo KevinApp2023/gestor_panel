@@ -269,8 +269,15 @@
 
   <li class="nav-item">
     <a class="nav-link " href="/admin/usuarios">
-      <i class="ri ri-shield-user-line"></i>
+      <i class="bi bi-shield-lock"></i>
       <span>Usuarios</span>
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link " href="/admin/configuracion">
+      <i class="bi bi-gear"></i>
+      <span>Configuracion</span>
     </a>
   </li>
 

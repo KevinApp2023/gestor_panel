@@ -12,10 +12,11 @@ RewriteRule ^admin/recargos$ /container/dash_admin/recargos.php [L,QSA]
 RewriteRule ^admin/recargos/([^/]+)$ /container/dash_admin/recargos.php?referencia=$1 [L,QSA]
 RewriteRule ^admin/clientes$ /container/dash_admin/clientes.php [L,QSA]
 RewriteRule ^admin/bonos$ /container/dash_admin/bonos.php [L,QSA]
-RewriteRule ^admin/usuarios$ /container/dash_admin/usuarios.php [L,QSA]
 RewriteRule ^admin/canchas$ /container/dash_admin/canchas.php [L,QSA]
 RewriteRule ^admin/canchas/([^/]+)$ /container/dash_admin/canchas.php?id=$1 [L,QSA]
 RewriteRule ^admin/reservas$ /container/dash_admin/reservas.php [L,QSA]
+RewriteRule ^admin/usuarios$ /container/dash_admin/usuarios.php [L,QSA]
+RewriteRule ^admin/configuracion$ /container/dash_admin/configuracion.php [L,QSA]
 
 
 #dash_cliente
