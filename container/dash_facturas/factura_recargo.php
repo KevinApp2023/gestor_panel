@@ -56,7 +56,7 @@ $pdf->Ln(2);
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", strtoupper("CLIENTE")), 0, 1);
 $pdf->SetFont('Arial', '', 10);
-$pdf->Cell(0, 5, "CC: $data_identificacion", 0, 1);
+$pdf->Cell(0, 5, "CED R.I.F: $data_identificacion", 0, 1);
 $pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Nombres: $data_nombres"), 0, 1);
 $pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Apellidos: $data_apellidos"), 0, 1);
 $pdf->Ln(3);
@@ -78,7 +78,7 @@ $pdf->Cell(0, 5, strtoupper("Detalle de la transaccion"), 0, 1);
 $pdf->Ln(2);
 
 $pdf->SetFont('Arial', '', 10);
-$pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Monto abonado: $$data_sub_total"), 0, 1);
+$pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Credito abonado: $$data_sub_total"), 0, 1);
 $pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Saldo pendiente: $0.00"), 0, 1);
 $pdf->Ln(2);
 
