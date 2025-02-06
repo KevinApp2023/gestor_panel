@@ -35,7 +35,7 @@ if($_SESSION['priv'] == '1'){
 } else if($_SESSION['priv'] == '2'){
   $sql = "SELECT r.*, c.nombre, cl.nombres, cl.apellidos FROM reservas r  JOIN canchas c  JOIN clientes cl ON r.id_cancha = c.id AND  r.id_cliente = cl.id  WHERE r.id_cancha = '$id_cancha' AND r.estado != '4' AND r.estado != '3'";
 } else if($_SESSION['priv'] == '3'){
-  $sql = "SELECT r.*, c.nombre, cl.nombres, cl.apellidos FROM reservas r  JOIN canchas c  JOIN clientes cl ON r.id_cancha = c.id AND  r.id_cliente = cl.id  WHERE r.id_cancha = '$id_cancha' AND r.estado != '4'  AND r.estado != '3' AND r.id_cliente = '$id_cliente'";
+  $sql = "SELECT r.*, c.nombre, cl.nombres, cl.apellidos FROM reservas r  JOIN canchas c  JOIN clientes cl ON r.id_cancha = c.id AND  r.id_cliente = cl.id  WHERE r.id_cancha = '$id_cancha' AND r.estado != '4'  AND r.estado != '3'";
 }
 
 $resultado = $conex->query($sql);

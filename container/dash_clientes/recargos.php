@@ -20,6 +20,7 @@ if ($resultado->num_rows > 0) {
         $data_nombres = $fila['nombres'];
         $data_apellidos = $fila['apellidos'];
         $data_sub_total = $fila['sub_total'];
+        $data_bono =$fila['bono'];
         $data_iva = $fila['iva'];
         $data_total = $fila['total'];
         if($fila['estado'] == '1'){
@@ -129,8 +130,12 @@ if ($resultado->num_rows > 0) {
                             <td class="text-end">$<?= $data_sub_total ?></td>
                         </tr>
                         <tr>
-                            <th>IVA (13%):</th>
-                            <td class="text-end">$<?= $data_iva ?></td>
+                            <th>Bono:</th>
+                            <td class="text-end">$<?= $data_bono ?></td>
+                        </tr>
+                        <tr>
+                        <th>IVA (<?= $iva ?>%):</th>
+                        <td class="text-end">$<?= $data_iva ?></td>
                         </tr>
                         <tr class="fw-bold">
                             <th>Total a Pagar:</th>
@@ -241,39 +246,6 @@ if ($resultado->num_rows > 0) {
 </div>
 
 
-
-
-
-
-<div class="modal fade" id="nuevo_recargo" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-4" id="exampleModalFullscreenLabel">Nuevo Recargo</h1>
-      </div>
-      <div class="modal-body">
-
-
-        <div class="mb-2 mb-3 d-block d-block d-lg-none">
-            <button class="btn btn-primary w-100" id="qr_movil"><i class="fas fa-mobile-alt me-2"></i>Abrir Escáner QR Movil</button>
-        </div>
-
-        <div class="mb-2 mb-3">
-            <input type="password" id="r_cliente" class="form-control" placeholder="CODIGO CLIENTE">
-        </div>
-
-        <div class="data_nuevo_recargo"  id="data_nuevo_recargo"></div>
-
-        </div>
-            
-
-
-      <div class="modal-footer" id="data_footer_nuevo_recargo">
-        <a type="button" id="cancelar" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-square me-2"></i>Cancelar</a>
-      </div>
-    </div>
-  </div>
-</div>
 
 
 </section>

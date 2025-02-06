@@ -16,7 +16,7 @@ $where = "WHERE 1=1";
 if (!empty($identificacion)) { $where .= " AND identificacion LIKE '%$identificacion%'"; }
 if (!empty($nombres)) { $where .= " AND nombres LIKE '%$nombres%'"; }
 if (!empty($apellidos)) { $where .= " AND apellidos LIKE '%$apellidos%'"; }
-if (!empty($correo_electronico)) { $where .= " AND correo_electronico LIKE '%$correo%'"; }
+if (!empty($correo_electronico)) { $where .= " AND correo_electronico LIKE '%$correo_electronico%'"; }
 if (!empty($telefono)) { $where .= " AND telefono LIKE '%$telefono%'"; }
 if (!empty($estado)) { $where .= " AND estado = '$estado'"; }
 

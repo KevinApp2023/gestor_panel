@@ -86,7 +86,7 @@ if ($resultado->num_rows > 0) {
     <td><?= $fila['identificacion'] ?></td>
     <td><?= $fila['nombres'] ?></td>
     <td><?= $fila['apellidos'] ?></td>
-    <td>$<?= $fila['total'] ?></td>
+    <td>$<?= $fila['sub_total'] +  $fila['bono'] ?></td>
     <td><?= $fila['estado'] ?></td>
     </tr>
     <?php

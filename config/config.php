@@ -40,7 +40,7 @@ if (preg_match('#^/admin/#', $requestUri)) {
 
 
 
-$consult = "SELECT * FROM config WHERE name IN ('title', 'keywords', 'description', 'icon', 'lang', 'NIT', 'direccion', 'telefono', 'mail_Host', 'mail_Username', 'mail_Password', 'mail_Port', 'mail_setFrom')";
+$consult = "SELECT * FROM config WHERE name IN ('title', 'keywords', 'description', 'icon', 'lang', 'RIF', 'direccion', 'telefono', 'mail_Host', 'mail_Username', 'mail_Password', 'mail_Port', 'mail_setFrom', 'l_consecutivo', 'n_consecutivo','iva')";
 $resultado = $conex->query($consult);
 
 if ($resultado->num_rows > 0) {
@@ -62,8 +62,8 @@ if ($resultado->num_rows > 0) {
                 $lang = $data['data'];
                 break;
            
-            case 'NIT':
-                $NIT = $data['data'];
+            case 'RIF':
+                $RIF = $data['data'];
                 break;
 
             case 'direccion':
@@ -94,6 +94,19 @@ if ($resultado->num_rows > 0) {
             case 'mail_setFrom':
                 $mail_setFrom = $data['data'];
                 break;
+            
+            case 'l_consecutivo':
+                $l_consecutivo = $data['data'];
+                break;
+
+            case 'n_consecutivo':
+                $n_consecutivo = $data['data'];
+                break;
+
+            case 'iva':
+                $iva = $data['data'];
+                break;
+                
             
         }
     }

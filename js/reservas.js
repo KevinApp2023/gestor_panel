@@ -116,7 +116,6 @@ $(document).ready(function() {
             if (result.isConfirmed) {
                 var form_data = new FormData();
                 form_data.append('id', id);
-
                 $.ajax({
                     type: "POST",
                     url: "/mi/src/cancelar_reserva_cancha",
@@ -124,6 +123,7 @@ $(document).ready(function() {
                     contentType: false,
                     processData: false,
                     success: function(response) {
+                        filtrar();
                         const Toast = Swal.mixin({
                             toast: true,
                             position: "top-end",
@@ -144,6 +144,11 @@ $(document).ready(function() {
                             Toast.fire({
                                 icon: "error",
                                 title: "Error al eliminar la reserva"
+                            });
+                        } else if (response == '3') {
+                            Toast.fire({
+                                icon: "warning",
+                                title: "Tiempo límite vencido. No puedes cancelar."
                             });
                         }
                     }

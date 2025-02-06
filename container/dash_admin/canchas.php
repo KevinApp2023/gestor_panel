@@ -22,6 +22,7 @@ include("../../mod/head.php");
 <input id="cancha" value="<?= $_GET['id'] ?>" class="d-none">
 <div id="calendar" style="max-width: 100%; margin: 0 auto;"></div>
 
+<a id="eliminar_cancha" value="<?= $_GET['id'] ?>" class="btn btn-danger w-100 mt-2"><i class="bi bi-trash-fill me-2"></i>Eliminar cancha</a>
 <script src='/js/index.global.js'></script>
 
 </section>

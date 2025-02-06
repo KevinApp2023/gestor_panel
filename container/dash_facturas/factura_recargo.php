@@ -1,8 +1,7 @@
 <?php
 include("../../config/config.php");
-
 $referencia = $_GET['referencia'];
-$sql = "SELECT r.*, c.identificacion, c.nombres, c.apellidos FROM recargos r LEFT JOIN clientes c ON r.cliente = c.id WHERE r.referencia = '$referencia'";
+$sql = "SELECT r.*, c.identificacion, c.nombres, c.apellidos, c.saldo FROM recargos r LEFT JOIN clientes c ON r.cliente = c.id WHERE r.referencia = '$referencia'";
 $resultado = $conex->query($sql);
 if ($resultado->num_rows > 0) {
     while ($fila = $resultado->fetch_assoc()) {
@@ -14,21 +13,57 @@ if ($resultado->num_rows > 0) {
         $data_nombres = $fila['nombres'];
         $data_apellidos = $fila['apellidos'];
         $data_sub_total = $fila['sub_total'];
+        $bono = $fila['bono'];
         $data_iva = $fila['iva'];
         $data_total = $fila['total'];
+        $saldo_cliente = $fila['saldo'];
+        if($fila['tipo'] == '1'){
+            $tipo = 'FACTURA';
+        }else{
+            $tipo = 'COMPROBANTE';
+        }
+
+        if($fila['estado'] == '1'){
+            $estado = 'Aprobado';
+            $estado_color = [76, 175, 80]; // Verde claro
+        }else{
+            $estado = 'Anulado';
+            $estado_color = [255, 0, 0]; // Rojo
+        }
     }
 }
 
 require "../../vendor/pdf/code128.php";
 
-$pdf = new PDF_Code128('P', 'mm', [80, 300]);
+$pdf = new PDF_Code128('P', 'mm', [80, 330]);
 $pdf->SetMargins(5, 5, 5);
 $pdf->AddPage();
 
+// Encabezado del ticket
+$pdf->Ln(10);
+$pdf->SetFont('Arial', 'B', 20);
+$pdf->SetTextColor(32, 100, 210);
+$pdf->Cell(0, 8, iconv("UTF-8", "ISO-8859-1", strtoupper($tipo)), 0, 1, 'C');
+
+// Estado
+$pdf->SetFont('Arial', 'B', 10);
+$pdf->SetTextColor(32, 100, 210);
+$pdf->SetTextColor($estado_color[0], $estado_color[1], $estado_color[2]);
+$pdf->Cell(0, 2, iconv("UTF-8", "ISO-8859-1", strtoupper($estado)), 0, 1, 'C');
+
+
+
 $imgWidth = 50;
+$maxHeight = 45; 
 $imgX = (80 - $imgWidth) / 2;
-$pdf->Image("../..$icon", $imgX, 5, $imgWidth);
-$pdf->Ln(40);
+list($originalWidth, $originalHeight) = getimagesize("../..$icon");
+$imgHeight = ($imgWidth / $originalWidth) * $originalHeight;
+if ($imgHeight > $maxHeight) {
+    $imgHeight = $maxHeight;
+}
+$pdf->Image("../..$icon", $imgX, 30, $imgWidth, $imgHeight);
+$pdf->Ln($imgHeight + 5); 
+
 
 // Encabezado del ticket
 $pdf->SetFont('Arial', 'B', 12);
@@ -36,7 +71,7 @@ $pdf->SetTextColor(32, 100, 210);
 $pdf->Cell(0, 8, iconv("UTF-8", "ISO-8859-1", strtoupper($title)), 0, 1, 'C');
 $pdf->SetFont('Arial', '', 10);
 $pdf->SetTextColor(39, 39, 51);
-$pdf->Cell(0, 5, "NIT: $NIT", 0, 1, 'C');
+$pdf->Cell(0, 5, "RIF: $RIF", 0, 1, 'C');
 $pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "$direccion"), 0, 1, 'C');
 $pdf->Cell(0, 5, "Tel: $telefono", 0, 1, 'C');
 
@@ -59,11 +94,12 @@ $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(0, 5, "CED R.I.F: $data_identificacion", 0, 1);
 $pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Nombres: $data_nombres"), 0, 1);
 $pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Apellidos: $data_apellidos"), 0, 1);
+$pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Saldo: $saldo_cliente"), 0, 1);
 $pdf->Ln(3);
 
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "QR CLIENTE"), 0, 1, 'C');
-$pdf->Image("../../qr_cliente/$data_cliente.png", $imgX, 115, $imgWidth);
+$pdf->Image("../../qr_cliente/$data_cliente.png", $imgX, 143, $imgWidth);
 $pdf->Ln(60);
 
 
@@ -79,14 +115,14 @@ $pdf->Ln(2);
 
 $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Credito abonado: $$data_sub_total"), 0, 1);
-$pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Saldo pendiente: $0.00"), 0, 1);
+$pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Credito bono: $$bono"), 0, 1);
 $pdf->Ln(2);
 
 // Totales
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(40, 6, "Subtotal:", 0, 0);
 $pdf->Cell(30, 6, "$$data_sub_total", 0, 1, 'R');
-$pdf->Cell(40, 6, "IVA (13%):", 0, 0);
+$pdf->Cell(40, 6, "IVA ($iva%):", 0, 0);
 $pdf->Cell(30, 6, "$$data_iva", 0, 1, 'R');
 $pdf->Cell(40, 6, "Total a pagar:", 0, 0);
 $pdf->Cell(30, 6, "$$data_total", 0, 1, 'R');
@@ -111,3 +147,6 @@ $pdf->MultiCell(0, 5, iconv("UTF-8", "ISO-8859-1", "Recuerde consultar en su cue
 
 // Generar el PDF
 $pdf->Output("I", "$data_fecha _$data_hora _REF_$data_referencia.pdf", true);
+?>
+<link rel="icon" href="<?= $icon ?>">
+<?php

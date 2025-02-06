@@ -169,7 +169,6 @@ $valor_hora = $tablag['valor_hora'];
       </div>
       <div class="modal-footer">
         <a type="button" id="cancha_cancelar" class="btn btn-secondary" data-bs-dismiss="modal"><i class="bi bi-x-square me-2"></i>Cerrar</a>
-        <a type="button" id="cancha_eliminar" class="btn btn-danger" data-bs-dismiss="modal"><i class="bi bi-trash3 me-2"></i>Cancelar</a>
         </div>
     </div>
   </div>

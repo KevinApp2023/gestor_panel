@@ -9,7 +9,7 @@ function desencriptar_datos($datos, $clave_secreta) {
 
 $id_e = $_POST['id'];
 $id_cancha = desencriptar_datos($id_e, $clave_secreta);
-$id_cliente = $_SESSION['propietario'];
+$id_cliente = $_POST['propietario'];
 $r_fecha = $_POST['r_fecha'];
 $r_hora_inicio = $_POST['r_hora_inicio']; 
 $r_hora_final = $_POST['r_hora_final'];  

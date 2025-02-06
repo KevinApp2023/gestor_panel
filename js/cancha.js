@@ -206,6 +206,7 @@ $(document).ready(function() {
                     contentType: false,
                     processData: false,
                     success: function(response) {
+                        filtrar();
                         const Toast = Swal.mixin({
                             toast: true,
                             position: "top-end",
@@ -363,3 +364,56 @@ function limpiar_input() {
 }
 }
 
+
+
+$(document).ready(function() {
+    $(document).on('click', '#eliminar_cancha', function(event) {
+        var id = event.target.getAttribute("value");
+        Swal.fire({
+            title: "¿Estás seguro de que deseas eliminar esta cancha?",
+            text: "Esta acción no se puede deshacer.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí, eliminar",
+            cancelButtonText: "Cancelar"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                var form_data = new FormData();
+                form_data.append('id', id);
+                $.ajax({
+                    type: "POST",
+                    url: "/mi/src/eliminar_cancha",
+                    data: form_data,
+                    contentType: false,
+                    processData: false,
+                    success: function(response) {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 1000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        if (response == '1') {
+                            Toast.fire({
+                                icon: "success",
+                                title: "Cancha eliminada con éxito"
+                            }).then(() => {
+                                window.location = "/admin/canchas";
+                            });
+                        } else if (response == '2') {
+                            Toast.fire({
+                                icon: "error",
+                                title: "Error al eliminar la cancha"
+                            });
+                        }
+                    }
+                });
+            }
+        });
+    });
+});

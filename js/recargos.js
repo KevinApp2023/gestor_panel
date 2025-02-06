@@ -66,6 +66,15 @@ $(document).ready(function() {
 
             <div class="mb-3">
                 <h6 class="fw-bold border-bottom pb-2">Factura de Venta</h6>
+
+                <div class="mb-2">
+                    <label class="fw-bold">IVA</label>
+                   <select id="iva" name="iva" class="border-primary form-control custom-input "  >
+                   <option value="1">Con IVA</option>
+                   <option value="2">Sin IVA</option>
+                   </select>
+                 </div>
+
                 <div class="mb-2">
                     <label class="fw-bold">SubTotal</label>
                 
@@ -124,6 +133,7 @@ $(document).ready(function() {
                     var form_data = new FormData();
                     form_data.append('cliente', $('#r_cliente').val());
                     form_data.append('sub_total', $('#sub_total').val());
+                    form_data.append('iva', $('#iva').val());
                   
                 $.ajax({
                     type: "POST",
@@ -132,7 +142,6 @@ $(document).ready(function() {
                     contentType: false,
                     processData: false,
                     success: function(response) {
-                        $('body').append(response);
                         const Toast = Swal.mixin({
                             toast: true,
                             position: "top-end",

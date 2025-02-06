@@ -50,8 +50,8 @@ include("../../mod/head.php");
                   <h5 class="card-title">Detalles del perfil</h5>
 
                   <div class="row">
-                    <div class="col-lg-3 col-md-4 label ">NIT</div>
-                    <div class="col-lg-9 col-md-8"><?=  $NIT ?></div>
+                    <div class="col-lg-3 col-md-4 label ">RIF</div>
+                    <div class="col-lg-9 col-md-8"><?=  $RIF ?></div>
                   </div>
 
                   <div class="row">
@@ -68,7 +68,10 @@ include("../../mod/head.php");
                     <div class="col-lg-3 col-md-4 label">Correo electronico</div>
                     <div class="col-lg-9 col-md-8"><?= $mail_Username ?></div>
                   </div>
-
+                  <div class="row">
+                    <div class="col-lg-3 col-md-4 label">Proximo consecutivo</div>
+                    <div class="col-lg-9 col-md-8"><?= $l_consecutivo . $n_consecutivo ?></div>
+                  </div>
 
                 </div>
 
@@ -77,10 +80,11 @@ include("../../mod/head.php");
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Logo principal</label>
                       <div class="col-md-8 col-lg-9">
-                        <img src="<?= $icon ?>" class="w-100 p-3" alt="Profile">
+                        <img src="<?= $icon ?>" class="w-100 p-3" alt="Profile" id="icon">
                         <div class="pt-2">
-                          <a href="#" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload"></i></a>
-                          <a href="#" class="btn btn-danger btn-sm" title="Remove my profile image"><i class="bi bi-trash"></i></a>
+                          <a id="abrir_input_file_icon" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload me-2"></i> Seleccionar Icono</a>
+                          <input id="input_file_icon" accept=".jpg, .jpeg, .png" type="file" class="d-none rounded border border-secondary form-control bg-white p-2" id="icon">
+                        
                         </div>
                       </div>
                     </div>
@@ -88,48 +92,59 @@ include("../../mod/head.php");
                     <div class="row mb-3">
                       <label for="fullName" class="col-md-4 col-lg-3 col-form-label">Titulo</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="fullName" value="<?= $title ?>" class="form-control" id="fullName" value="Kevin Anderson">
+                        <input value="<?= $title ?>" class="form-control" id="title">
                       </div>
                     </div>
 
                     <div class="row mb-3">
-                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">NIT</label>
+                      <label for="fullName" class="col-md-4 col-lg-3 col-form-label">RIF</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="fullName" value="<?= $NIT ?>" class="form-control" id="fullName" value="Kevin Anderson">
+                        <input value="<?= $RIF ?>" class="form-control" id="RIF" >
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="about" class="col-md-4 col-lg-3 col-form-label">Descripcion</label>
                       <div class="col-md-8 col-lg-9">
-                        <textarea name="about" class="form-control" id="about" style="height: 100px"><?= $description ?></textarea>
+                        <textarea class="form-control" id="description" style="height: 100px"><?= $description ?></textarea>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="about" class="col-md-4 col-lg-3 col-form-label">keywords</label>
                       <div class="col-md-8 col-lg-9">
-                        <textarea name="about" class="form-control" id="about" style="height: 100px"><?= $keywords ?></textarea>
+                        <textarea class="form-control" id="keywords" style="height: 100px"><?= $keywords ?></textarea>
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="company" class="col-md-4 col-lg-3 col-form-label">Direccion</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="company" value="<?= $direccion ?>" class="form-control" id="company" value="Lueilwitz, Wisoky and Leuschke">
+                        <input  value="<?= $direccion ?>" class="form-control" id="direccion">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="Job" class="col-md-4 col-lg-3 col-form-label">Telefono</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="job" value="<?= $telefono ?>" class="form-control" id="Job" value="Web Designer">
+                        <input value="<?= $telefono ?>" class="form-control" id="telefono">
+                      </div>
+                    </div>
+                    <div class="row mb-3">
+                      <label for="Job" class="col-md-4 col-lg-3 col-form-label">Consecutivo Factura y Ticket Recargos</label>
+                      <div class="col-md-8 col-lg-9">
+                        <div class="row">
+                          <div class="col-6"><input value="<?= $l_consecutivo ?>" class="form-control" id="l_consecutivo"></div>
+                          <div class="col-6"><input value="<?= $n_consecutivo ?>" class="form-control" id="n_consecutivo"></div>
+                        </div>
+                        
+                        
                       </div>
                     </div>
                     
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                      <a id="guardar_cambios_general" class="btn btn-primary">Guardar cambios</a>
                     </div>
 
                 </div>
@@ -142,28 +157,28 @@ include("../../mod/head.php");
                     <div class="row mb-3">
                       <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Servidor SMTP</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="password" type="" value="<?= $mail_Host ?>" class="form-control" id="currentPassword">
+                        <input value="<?= $mail_Host ?>" class="form-control" id="mail_Host">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">SMTP Usuario</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="newpassword" type="" value="<?= $mail_Username ?>"   class="form-control" id="newPassword">
+                        <input value="<?= $mail_Username ?>"   class="form-control" id="mail_Username">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">SMTP Password</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="password" value="<?= $mail_Password ?>" class="form-control" id="renewPassword">
+                        <input type="password" value="<?= $mail_Password ?>" class="form-control" id="mail_Password">
                       </div>
                     </div>
 
                     <div class="row mb-3">
                       <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">SMTP Puerto</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="" value="<?= $mail_Port ?>" class="form-control" id="renewPassword">
+                        <input value="<?= $mail_Port ?>" class="form-control" id="mail_Port">
                       </div>
                     </div>
 
@@ -171,19 +186,19 @@ include("../../mod/head.php");
                     <div class="row mb-3">
                       <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Conjunto SMTP desde</label>
                       <div class="col-md-8 col-lg-9">
-                        <input name="renewpassword" type="" value="<?= $mail_setFrom ?>" class="form-control" id="renewPassword">
+                        <input value="<?= $mail_setFrom ?>" class="form-control" id="mail_setFrom">
                       </div>
                     </div>
 
 
                     <div class="text-center">
-                      <button type="submit" class="btn btn-primary">Guardar SMTP</button>
+                      <a id="guardar_cambios_smtp" class="btn btn-primary">Guardar SMTP</a>
                     </div>
-                  </form><!-- End Change Password Form -->
+                  </form>
 
                 </div>
 
-              </div><!-- End Bordered Tabs -->
+              </div>
 
             </div>
           </div>
@@ -197,7 +212,7 @@ include("../../mod/head.php");
 
 
 
-
+<script src="/js/config.js"></script>
 
 <?php 
 include('../../mod/footer.php');

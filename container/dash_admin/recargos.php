@@ -20,6 +20,7 @@ if ($resultado->num_rows > 0) {
         $data_nombres = $fila['nombres'];
         $data_apellidos = $fila['apellidos'];
         $data_sub_total = $fila['sub_total'];
+        $data_bono =$fila['bono'];
         $data_iva = $fila['iva'];
         $data_total = $fila['total'];
         if($fila['estado'] == '1'){
@@ -129,7 +130,11 @@ if ($resultado->num_rows > 0) {
                             <td class="text-end">$<?= $data_sub_total ?></td>
                         </tr>
                         <tr>
-                            <th>IVA (13%):</th>
+                            <th>Bono:</th>
+                            <td class="text-end">$<?= $data_bono ?></td>
+                        </tr>
+                        <tr>
+                            <th>IVA (<?= $iva ?>%):</th>
                             <td class="text-end">$<?= $data_iva ?></td>
                         </tr>
                         <tr class="fw-bold">

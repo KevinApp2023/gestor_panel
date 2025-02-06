@@ -14,30 +14,34 @@ if (isset($_POST['id']) && !empty($_POST['id'])) {
         $resultado_consulta = $conex->query($sql_consulta);
         if ($resultado_consulta->num_rows > 0) {
             while ($fila = $resultado_consulta->fetch_assoc()) {
-            
-            
-            $total = $fila['total'];
-            $cliente = $fila['id_cliente'];
-            $sql = "UPDATE reservas SET estado='4' WHERE id = '$id' AND estado = '1'";
-            $resultado = $conex->query($sql);
-            if ($resultado) {
-                
-                
-                $unique_sql_update_saldo = "UPDATE clientes SET saldo = saldo + '$total' WHERE id = '$cliente'";
-                $unique_resultado_update_saldo = $conex->query($unique_sql_update_saldo);
-                if ($unique_resultado_update_saldo) {
-                    echo '1';
+                $hora = date("H:i:s", strtotime($hora . " +3 hours"));
+            if ($fila['r_fecha'] == $fecha && $fila['r_hora_inicio'] <= $hora){
+
+                echo '3';
+
+            }else{
+
+                $total = $fila['total'];
+                $cliente = $fila['id_cliente'];
+                $sql = "UPDATE reservas SET estado='4' WHERE id = '$id' AND estado = '1'";
+                $resultado = $conex->query($sql);
+                if ($resultado) {
+                    
+                    $unique_sql_update_saldo = "UPDATE clientes SET saldo = saldo + '$total' WHERE id = '$cliente'";
+                    $unique_resultado_update_saldo = $conex->query($unique_sql_update_saldo);
+                    if ($unique_resultado_update_saldo) {
+                        echo '1';
+                    } else {
+                        echo '2';
+                    }
+               
+               
                 } else {
                     echo '2';
                 }
-           
-           
-            } else {
-                echo '2';
+
+
             }
-
-
-
         }
     }
 
