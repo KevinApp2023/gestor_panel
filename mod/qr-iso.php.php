@@ -95,24 +95,11 @@ const cerrarCamara = () => {
 qrcode.callback = (respuesta) => {
   if (respuesta) {
 
-    if (currentPath.includes('invitados/datos')){
-
-          $('#d_codigo').val(content); 
-            var event = new KeyboardEvent('keypress', {
-                key: 'Enter',
-                code: 'Enter',
-                keyCode: 13,
-                which: 13,
-                charCode: 13,
-                bubbles: true,
-                cancelable: true,
-            });
-            document.getElementById('d_codigo').dispatchEvent(event);
-
-        }else{
-           
+    if (currentPath.includes('admin/recargos')){
           document.getElementById("r_cliente").value = respuesta;
           simularEnter();
+          var cerrar_qr_movil = document.getElementById("qr_movil").click();
+        }else{
 
         }
 

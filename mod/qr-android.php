@@ -22,22 +22,8 @@ $(document).ready(function() {
     scanner = new Instascan.Scanner({ video: document.getElementById('video') });
     scanner.addListener('scan', function(content) {
         const currentPath = window.location.pathname + window.location.hash;
-        if (currentPath.includes('invitados/datos')){
+        if (currentPath.includes('admin/recargos')){
            
-
-            $('#d_codigo').val(content); 
-            var event = new KeyboardEvent('keypress', {
-                key: 'Enter',
-                code: 'Enter',
-                keyCode: 13,
-                which: 13,
-                charCode: 13,
-                bubbles: true,
-                cancelable: true,
-            });
-            document.getElementById('d_codigo').dispatchEvent(event);
-
-        }else{
             $('#r_cliente').val(content); 
             var event = new KeyboardEvent('keypress', {
                 key: 'Enter',
@@ -49,6 +35,10 @@ $(document).ready(function() {
                 cancelable: true,
             });
             document.getElementById('r_cliente').dispatchEvent(event);
+            var cerrar_qr_movil = document.getElementById("qr_movil").click();
+
+        }else{
+          
         }
 
            

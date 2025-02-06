@@ -25,11 +25,8 @@ if ($resultado->num_rows > 0) {
         $data_total = $fila['total'];
         if($fila['estado'] == '1'){
           $data_estado = '<a class="btn btn-success w-100">Aprobado</a>';
-          $data_estado_editar = '<a id="anular_estado" data-ref="' . $data_referencia . '" data-total="' . $data_total . '" data-cliente="' . $data_cliente . '"   class="btn btn-danger w-100">Anular</a>';
-
       }else{
           $data_estado = '<a class="btn btn-danger w-100">Anulado</a>';
-          $data_estado_editar = '';
       }
     }
 }
@@ -120,7 +117,6 @@ if ($resultado->num_rows > 0) {
         <div class="row">
             <div class="col-md-6 order-md-1 order-2">
                 <a id="factura" data-ref="<?= $_GET['referencia'] ?>" class="btn btn-primary w-100 mb-2"><i class="bx bxs-file-pdf me-2"></i>Factura</a>
-            <?= $data_estado_editar ?>
               </div>
             <div class="col-md-6 order-md-2 order-1">
                 <table class="table table-borderless">

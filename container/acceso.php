@@ -29,12 +29,20 @@ if (isset($_SESSION['priv'])){
           <div class="row justify-content-center">
             <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
 
-              <div class="d-flex justify-content-center py-4">
+              <div class="d-flex justify-content-center py-4 d-none d-md-block">
                 <a href="/" class="logo d-flex align-items-center w-auto">
-                  <img src="<?= $icon ?>" alt="">
-                  <span class="d-none d-lg-block"><?= $title ?></span>
+                  <img src="<?= $icon ?>">
+                  <span><?= $title ?></span>
                 </a>
               </div>
+
+              <div class="d-flex justify-content-center d-block d-md-none col-6">
+                <a href="/">
+                  <img src="<?= $icon ?>" class="w-100">
+                </a>
+              </div>
+
+
               <div class="card mb-3 pt-4">
 
                 <div class="card-body" id="container_acceso">
