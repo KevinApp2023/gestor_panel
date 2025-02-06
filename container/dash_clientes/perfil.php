@@ -48,9 +48,6 @@ include("../../mod/head.php");
               <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit" aria-selected="false" tabindex="-1" role="tab">Editar perfil</button>
             </li>
             <li class="nav-item" role="presentation">
-              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-settings" aria-selected="false" tabindex="-1" role="tab">Ajustes</button>
-            </li>
-            <li class="nav-item" role="presentation">
               <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-change-password" aria-selected="false" tabindex="-1" role="tab">Cambiar contraseña</button>
             </li>
           </ul>
@@ -93,7 +90,6 @@ include("../../mod/head.php");
             </div>
 
             <div class="tab-pane fade profile-edit pt-3" id="profile-edit" role="tabpanel">
-              <form>
                 <div class="row mb-3">
                   <label for="editar_identificacion" class="col-md-4 col-lg-3 col-form-label">Identificación</label>
                   <div class="col-md-8 col-lg-9">
@@ -131,52 +127,34 @@ include("../../mod/head.php");
                   </div>
                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary"><i class="bi bi-floppy me-2"></i>Guardar cambios</button>
+                  <a id="editar_perfil" class="btn btn-primary"><i class="bi bi-floppy me-2"></i>Guardar cambios</a>
                 </div>
-              </form>
             </div>
 
-            <div class="tab-pane fade pt-3" id="profile-settings" role="tabpanel">
-              <form>
-                <div class="row mb-3">
-                  <label class="col-md-4 col-lg-3 col-form-label">Notificaciones por correo</label>
-                  <div class="col-md-8 col-lg-9">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="email_notifications" checked>
-                      <label class="form-check-label" for="email_notifications">Activar</label>
-                    </div>
-                  </div>
-                </div>
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary"><i class="bi bi-floppy me-2"></i>Guardar cambios</button>
-                </div>
-              </form>
-            </div>
-
+           
             <div class="tab-pane fade pt-3" id="profile-change-password" role="tabpanel">
-              <form>
+              <div id="alert_r_pass"></div>
                 <div class="row mb-3">
                   <label for="currentPassword" class="col-md-4 col-lg-3 col-form-label">Contraseña Actual</label>
                   <div class="col-md-8 col-lg-9">
-                    <input name="password" type="password" class="form-control" id="currentPassword">
+                    <input type="password" class="form-control" id="pass_actual">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="newPassword" class="col-md-4 col-lg-3 col-form-label">Nueva Contraseña</label>
                   <div class="col-md-8 col-lg-9">
-                    <input name="newpassword" type="password" class="form-control" id="newPassword">
+                    <input  type="password" class="form-control" id="n_pass">
                   </div>
                 </div>
                 <div class="row mb-3">
                   <label for="renewPassword" class="col-md-4 col-lg-3 col-form-label">Repetir Nueva Contraseña</label>
                   <div class="col-md-8 col-lg-9">
-                    <input name="renewpassword" type="password" class="form-control" id="renewPassword">
+                    <input type="password" class="form-control" id="r_n_pass">
                   </div>
                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary"><i class="bi bi-floppy me-2"></i>Cambiar contraseña</button>
+                  <button id="cambiar_pass" class="btn btn-primary"><i class="bi bi-floppy me-2"></i>Cambiar contraseña</button>
                 </div>
-              </form>
             </div>
           </div>
         </div>
