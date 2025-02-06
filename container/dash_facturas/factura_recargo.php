@@ -1,7 +1,7 @@
 <?php
 include("../../config/config.php");
 $referencia = $_GET['referencia'];
-$sql = "SELECT r.*, c.identificacion, c.nombres, c.apellidos, c.saldo FROM recargos r LEFT JOIN clientes c ON r.cliente = c.id WHERE r.referencia = '$referencia'";
+$sql = "SELECT r.*, c.identificacion, c.nombres, c.apellidos, c.direccion, c.saldo FROM recargos r LEFT JOIN clientes c ON r.cliente = c.id WHERE r.referencia = '$referencia'";
 $resultado = $conex->query($sql);
 if ($resultado->num_rows > 0) {
     while ($fila = $resultado->fetch_assoc()) {
@@ -12,6 +12,7 @@ if ($resultado->num_rows > 0) {
         $data_identificacion = $fila['identificacion'];
         $data_nombres = $fila['nombres'];
         $data_apellidos = $fila['apellidos'];
+        $data_direccion = $fila['direccion'];
         $data_sub_total = $fila['sub_total'];
         $bono = $fila['bono'];
         $data_iva = $fila['iva'];
@@ -94,13 +95,45 @@ $pdf->SetFont('Arial', '', 10);
 $pdf->Cell(0, 5, "CED R.I.F: $data_identificacion", 0, 1);
 $pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Nombres: $data_nombres"), 0, 1);
 $pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Apellidos: $data_apellidos"), 0, 1);
+$pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Dirección: $data_direccion"), 0, 1);
 $pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "Saldo: $saldo_cliente"), 0, 1);
 $pdf->Ln(3);
 
+
+
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(0, 5, iconv("UTF-8", "ISO-8859-1", "QR CLIENTE"), 0, 1, 'C');
-$pdf->Image("../../qr_cliente/$data_cliente.png", $imgX, 143, $imgWidth);
-$pdf->Ln(60);
+
+
+
+
+// Obtener la posición actual antes de agregar el QR
+$posAntesQR = $pdf->GetY();
+
+// Definir la altura esperada del QR
+$imgWidth = 50;
+$maxHeight = 55;
+$imgX = (80 - $imgWidth) / 2; 
+
+// Cargar la imagen para obtener su tamaño real
+list($originalWidth, $originalHeight) = getimagesize("../../qr_cliente/$data_cliente.png");
+$imgHeight = ($imgWidth / $originalWidth) * $originalHeight;
+if ($imgHeight > $maxHeight) {
+    $imgHeight = $maxHeight;
+}
+
+// Determinar la posición después del QR (simulación de contenido siguiente)
+$posDespuesQR = $pdf->GetY() + 55; // Aproximadamente la altura del QR más margen
+
+// Calcular el centro entre los dos puntos
+$centroQR = ($posAntesQR + $posDespuesQR - $imgHeight) / 2;
+
+// Posicionar la imagen en el centro dinámicamente
+$pdf->Image("../../qr_cliente/$data_cliente.png", $imgX, $centroQR, $imgWidth);
+
+// Ajustar la posición después de la imagen para evitar superposiciones
+$pdf->SetY($posDespuesQR);
+$pdf->Ln(5);
 
 
 
@@ -148,5 +181,3 @@ $pdf->MultiCell(0, 5, iconv("UTF-8", "ISO-8859-1", "Recuerde consultar en su cue
 // Generar el PDF
 $pdf->Output("I", "$data_fecha _$data_hora _REF_$data_referencia.pdf", true);
 ?>
-<link rel="icon" href="<?= $icon ?>">
-<?php

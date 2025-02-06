@@ -80,7 +80,9 @@ include("../../mod/head.php");
                     <div class="row mb-3">
                       <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Logo principal</label>
                       <div class="col-md-8 col-lg-9">
+                        <div class="col-md-6 col-12">
                         <img src="<?= $icon ?>" class="w-100 p-3" alt="Profile" id="icon">
+                        </div>
                         <div class="pt-2">
                           <a id="abrir_input_file_icon" class="btn btn-primary btn-sm" title="Upload new profile image"><i class="bi bi-upload me-2"></i> Seleccionar Icono</a>
                           <input id="input_file_icon" accept=".jpg, .jpeg, .png" type="file" class="d-none rounded border border-secondary form-control bg-white p-2" id="icon">
