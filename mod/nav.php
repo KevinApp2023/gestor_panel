@@ -185,6 +185,13 @@
     </a>
   </li>
 
+  <li class="nav-item">
+    <a class="nav-link " href="/clientes/digital">
+    <i class="bi bi-postcard"></i>
+      <span>Digital</span>
+    </a>
+  </li>
+
    <?php }
 
 }

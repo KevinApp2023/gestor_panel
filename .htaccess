@@ -27,6 +27,7 @@ RewriteRule ^clientes/canchas$ /container/dash_clientes/canchas.php [L,QSA]
 RewriteRule ^clientes/canchas/([^/]+)$ /container/dash_clientes/canchas.php?id=$1 [L,QSA]
 RewriteRule ^clientes/reservas$ /container/dash_clientes/reservas.php [L,QSA]
 RewriteRule ^clientes/perfil$ /container/dash_clientes/perfil.php [L,QSA]
+RewriteRule ^clientes/digital$ /container/dash_clientes/digital.php [L,QSA]
 
 #dash_facturas
 RewriteRule ^facturas/recargos/([^/]+)$ /container/dash_facturas/factura_recargo.php?referencia=$1 [L,QSA]
