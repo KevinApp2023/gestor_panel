@@ -75,3 +75,22 @@ $(document).ready(function() {
 
     });
 });
+
+
+let isFetching = false;
+
+function consultarReservas() {
+    if (isFetching) return;
+    isFetching = true;
+
+    fetch('/mi/src/consultar_activar_desactivar_reserva')
+        .then(response => response.json())
+        .then(data => {
+            console.log("Datos actualizados:", data);
+        })
+        .catch(error => console.error("Error en la consulta:", error))
+        .finally(() => isFetching = false);
+}
+
+setInterval(consultarReservas, 300);
+consultarReservas();

@@ -11,17 +11,27 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+let lastResponse = "";
+
 function filtrar() {
-$.ajax({
-    url: '/mi/src/canchas',
-    method: 'POST',
-    data: { 
-    },
-    success: function(response) {
-        $('#data_canchas').html(response);
-    }
-});
+    $.ajax({
+        url: '/mi/src/canchas',
+        method: 'POST',
+        data: {},
+        success: function(response) {
+            if (response !== lastResponse) {
+                $('#data_canchas').html(response);
+                lastResponse = response;
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error("Error en la consulta:", error);
+        }
+    });
 }
+
+setInterval(filtrar, 3000);
+filtrar();
 
 if (currentPath.includes('/admin/canchas')){
 $(document).ready(function() {

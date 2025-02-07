@@ -1,4 +1,3 @@
-
 <?php
 include("../config/config.php");
 include("../config/openssl_decrypt_pass_cs.php");
@@ -93,18 +92,6 @@ echo ']';
   $nombres = $_POST['nombres'];
   $apellidos = $_POST['apellidos'];
   $estado = $_POST['estado'];
-  
-
-
-
-
-  
-  
-
-
-
-
-
 
 if($_SESSION['priv'] == '1'){
   $where = "WHERE 1=1";
@@ -163,7 +150,7 @@ if ($resultado->num_rows > 0) {
       } else if($fila['estado'] == '2'){
         $fila['estado']  = '<a class="btn btn-primary">Ocupado</a>';
       } else if($fila['estado'] == '3'){
-        $fila['estado']  = '<a class="btn btn-success">Ocupado</a>';
+        $fila['estado']  = '<a class="btn btn-success">Completado</a>';
       } else if($fila['estado'] == '4'){
         $fila['estado']  = '<a class="btn btn-danger">Cancelado</a>';
       }
